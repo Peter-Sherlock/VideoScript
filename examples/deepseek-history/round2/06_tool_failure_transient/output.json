@@ -1,0 +1,251 @@
+{
+  "case_id": "06_tool_failure_transient",
+  "case_description": "工具失败（可恢复）：search_materials 第一次超时",
+  "status": "completed",
+  "status_reason": "脚本 v5 已通过时长与规则检查",
+  "title": "vlog新手收音避坑：帧跃M2无线麦克风",
+  "platform": "抖音",
+  "target_duration_sec": 30.0,
+  "estimated_total_sec": 30.0,
+  "script_version": "v5",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 7.1,
+      "visual": "手持手机回放vlog，声音发闷；切空调风扇嗡嗡响，手机自带麦杂音波形",
+      "narration": "拍vlog最崩的不是画面，是声音。空调风扇一开，人声全被底噪盖住。",
+      "subtitle": "画面还行，声音崩了",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 4.5,
+      "visual": "产品特写：帧跃M2发射器夹在衣领，一键开启AI降噪",
+      "narration": "帧跃M2一键开AI降噪，底噪能压下去。",
+      "subtitle": "帧跃M2 一键AI降噪",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 6.5,
+      "visual": "咖啡馆场景对比：开启降噪前后人声清晰度评分字幕",
+      "narration": "内部测试65分贝咖啡馆，清晰度3.1升到4.3分。",
+      "subtitle": "清晰度 3.1→4.3（5分制）",
+      "screen_note": "数据来自内部小样本测试，仅供参考",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M04"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 4.6,
+      "visual": "接收器插上手机，直接开拍，无需装App",
+      "narration": "Type-C、Lightning双版本，插上就用，不用装App。",
+      "subtitle": "双接口，插上就用",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M05"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": 4.1,
+      "visual": "户外走动拍摄，发射器续航与传输距离字幕",
+      "narration": "续航约8小时，空旷能传约50米。",
+      "subtitle": "续航约8h｜传输约50m",
+      "screen_note": "续航为实验室数据，实际以使用环境为准；传输距离为空旷环境测试值",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M02",
+        "M03"
+      ]
+    },
+    {
+      "shot_id": 6,
+      "duration_sec": 3.2,
+      "visual": "产品与价格卡同框，结尾定格",
+      "narration": "首发399元，新手够用。",
+      "subtitle": "首发399元",
+      "screen_note": "价格以官方页面为准；活动时间2026-11-11至2026-11-20",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M06"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M02",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 发射器续航约 8 小时（单次充满连续录音，实验室条件，关闭降噪）。",
+      "source": "M2 产品规格书 v1.0（合成）",
+      "required_disclaimer": "续航为实验室数据，实际以使用环境为准"
+    },
+    {
+      "id": "M03",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 在空旷无遮挡环境下有效传输距离约 50 米。",
+      "source": "M2 产品规格书 v1.0（合成）",
+      "required_disclaimer": "传输距离为空旷环境测试值"
+    },
+    {
+      "id": "M04",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "effect_data",
+      "fact": "内部测试（20 名测试者，约 65dB 咖啡馆环境）：开启 AI 降噪后，人声清晰度主观评分由 3.1 分提升至 4.3 分（5 分制）。",
+      "source": "M2 内部听感测试报告 2026-09（合成）",
+      "required_disclaimer": "数据来自内部小样本测试，仅供参考"
+    },
+    {
+      "id": "M05",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本，插上手机即可使用，无需安装 App。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M06",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "price",
+      "fact": "帧跃 M2 首发价 399 元（含 1 个发射器和 1 个接收器），活动时间 2026-11-11 至 2026-11-20。",
+      "source": "M2 上市活动 brief（合成）",
+      "required_disclaimer": "价格以官方页面为准"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 30.0,
+      "allowed_range_sec": [
+        24.0,
+        30.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 4.5,
+      "script_version": "v5"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v5"
+    }
+  },
+  "risks": [
+    "受众按简报设定为vlog新手，风格为轻松种草；未提供具体人设与出镜形式，脚本按口播+产品特写设计",
+    "效果数据来自内部小样本测试（20人、约65dB咖啡馆），已在镜头3加免责角标，不可外推为通用效果",
+    "续航8小时为实验室条件（关闭降噪）数据，传输50米为空旷无遮挡测试值，均已加免责说明",
+    "价格399元为2026-11-11至2026-11-20首发活动价，投放时间若超出活动期需替换价格表述",
+    "脚本未包含任何未在素材中出现的功能（如防水、多设备连接等），如需补充卖点请提供素材"
+  ],
+  "system_notes": [
+    "工具调用失败 1 次：['search_materials: TIMEOUT']"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 37.9,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 34.5,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 32.0,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v4",
+      "estimated_sec": 30.3,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v5",
+      "estimated_sec": 30.0,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 卖点 参数",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": "vlog 新手收音避坑：帧跃 M2 无线麦克风",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "刚开始拍 vlog 的新手创作者",
+    "platform": "抖音",
+    "target_duration_sec": 30.0,
+    "style": "轻松种草",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "vlog 新手收音避坑：帧跃 M2 无线麦克风",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "刚开始拍 vlog 的新手创作者",
+    "platform": "抖音",
+    "target_duration_sec": 30.0,
+    "style": "轻松种草",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 9,
+    "tool_calls_used": 9,
+    "tool_call_counts": {
+      "search_materials": 2,
+      "estimate_duration": 5,
+      "check_rules": 1,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  }
+}

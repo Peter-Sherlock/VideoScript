@@ -1,0 +1,263 @@
+{
+  "case_id": "03b_missing_info_answered",
+  "case_description": "缺关键信息 + 用户补充后继续：预置用户回答“发抖音，20 秒左右”",
+  "status": "failed",
+  "status_reason": "estimate_duration 工具已达单工具 8 次调用上限，无法再验证脚本时长；最后一版可验证结果为 v6 总时长 21.5 秒，超出抖音 20 秒目标上限 1.5 秒（允许区间 16–20 秒），因此无法在预算内同时完成“时长达标 + 通过 check_rules + 提交”。",
+  "title": "上班族做口播，声音先过关｜帧跃 M2",
+  "platform": "抖音",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": 21.5,
+  "script_version": "v6",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 3.0,
+      "visual": "上班族在书桌前举起手机，背景空调嗡嗡响，皱眉",
+      "narration": "下班录口播，全是空调声？",
+      "subtitle": "一开录全是空调声？",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 3.1,
+      "visual": "特写：发射器夹衣领，接收器插手机，屏幕直接出画面",
+      "narration": "帧跃 M2，插上手机就用。",
+      "subtitle": "插上就用，免装 App",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M05"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 3.1,
+      "visual": "手指按一下发射器，降噪开启，环境底噪明显变小",
+      "narration": "一键 AI 降噪，底噪压下去。",
+      "subtitle": "一键 AI 降噪",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 4.2,
+      "visual": "分屏对比：降噪前后人声波形与评分字幕",
+      "narration": "内部测试清晰度 3.1 到 4.3。",
+      "subtitle": "清晰度 3.1→4.3",
+      "screen_note": "数据来自内部小样本测试，仅供参考",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M04"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": 2.4,
+      "visual": "人在客厅走动，手机架远处继续录",
+      "narration": "空旷能传 50 米。",
+      "subtitle": "传输约 50 米",
+      "screen_note": "传输距离为空旷环境测试值",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M03"
+      ]
+    },
+    {
+      "shot_id": 6,
+      "duration_sec": 3.2,
+      "visual": "产品与价格卡同框，右下角活动时间",
+      "narration": "首发 399，含发射接收。",
+      "subtitle": "首发 399 元",
+      "screen_note": "价格以官方页面为准",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M06"
+      ]
+    },
+    {
+      "shot_id": 7,
+      "duration_sec": 2.5,
+      "visual": "上班族对镜头比 OK，出现购物车指引",
+      "narration": "做口播，先搞定声音。",
+      "subtitle": "先搞定声音",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M03",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 在空旷无遮挡环境下有效传输距离约 50 米。",
+      "source": "M2 产品规格书 v1.0（合成）",
+      "required_disclaimer": "传输距离为空旷环境测试值"
+    },
+    {
+      "id": "M04",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "effect_data",
+      "fact": "内部测试（20 名测试者，约 65dB 咖啡馆环境）：开启 AI 降噪后，人声清晰度主观评分由 3.1 分提升至 4.3 分（5 分制）。",
+      "source": "M2 内部听感测试报告 2026-09（合成）",
+      "required_disclaimer": "数据来自内部小样本测试，仅供参考"
+    },
+    {
+      "id": "M05",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本，插上手机即可使用，无需安装 App。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M06",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "price",
+      "fact": "帧跃 M2 首发价 399 元（含 1 个发射器和 1 个接收器），活动时间 2026-11-11 至 2026-11-20。",
+      "source": "M2 上市活动 brief（合成）",
+      "required_disclaimer": "价格以官方页面为准"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": false,
+      "status": "over",
+      "total_sec": 21.5,
+      "allowed_range_sec": [
+        16.0,
+        20.0
+      ],
+      "delta_sec": 1.5,
+      "speech_rate_cps": 4.5,
+      "script_version": "v6"
+    },
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [
+    "附带的脚本 v6 未通过全部检查，不可直接发布"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 31.5,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 25.6,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 22.3,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v4",
+      "estimated_sec": 22.1,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v5",
+      "estimated_sec": 21.8,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v6",
+      "estimated_sec": 21.5,
+      "duration": "over",
+      "rules": "未检查"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 卖点 参数",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": null,
+    "product": "帧跃 M2 无线麦克风",
+    "audience": null,
+    "platform": null,
+    "target_duration_sec": null,
+    "style": null,
+    "must_include": [],
+    "extra_requirements": null,
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本"
+  },
+  "brief_final": {
+    "topic": null,
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "想做口播的上班族",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": null,
+    "must_include": [],
+    "extra_requirements": null,
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本"
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 12,
+    "tool_calls_used": 13,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "request_user_input": 1,
+      "update_brief": 1,
+      "estimate_duration": 8,
+      "report_failure": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "failure": {
+    "reason": "estimate_duration 工具已达单工具 8 次调用上限，无法再验证脚本时长；最后一版可验证结果为 v6 总时长 21.5 秒，超出抖音 20 秒目标上限 1.5 秒（允许区间 16–20 秒），因此无法在预算内同时完成“时长达标 + 通过 check_rules + 提交”。",
+    "failed_checks": [
+      "estimate_duration: 总时长 21.5s 超出目标 20s（上限 20s），超出 1.5s",
+      "estimate_duration: 工具调用次数已达上限 8 次，无法继续迭代验证",
+      "check_rules: 因时长未达标，未进入规则检查环节"
+    ],
+    "suggestions": [
+      "把目标时长放宽到 22–25 秒，现有 7 镜脚本可直接使用（21.5s 已接近）",
+      "或删掉“空旷能传 50 米”这一镜（约 2.4s），即可落到 19.1s 达标，但会少一个卖点",
+      "或保留全部卖点，把旁白语速调快/减少停顿，由人工剪辑压缩到 20 秒内",
+      "确认后我可重新跑一轮时长估算与规则检查再提交"
+    ]
+  },
+  "user_replies": [
+    "发抖音，20 秒左右，面向想做口播的上班族"
+  ]
+}

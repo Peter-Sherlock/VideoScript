@@ -1,0 +1,88 @@
+{
+  "case_id": "04_no_material",
+  "case_description": "无素材：素材库里没有“帧跃 X1 智能云台”",
+  "status": "needs_input",
+  "status_reason": "缺少必要信息/素材，已向用户提出补充请求",
+  "title": null,
+  "platform": "小红书",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": null,
+  "script_version": null,
+  "shots": [],
+  "sources": [],
+  "checks": {
+    "duration": null,
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [],
+  "revision_history": [],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 X1 智能云台 卖点 参数",
+        "product": "帧跃 X1 智能云台",
+        "count": 0
+      },
+      {
+        "query": "帧跃 云台 X1 稳定器",
+        "product": null,
+        "count": 0
+      },
+      {
+        "query": "帧跃 开箱 产品线 品牌",
+        "product": null,
+        "count": 1
+      }
+    ],
+    "retrieved_ids": [
+      "B01"
+    ]
+  },
+  "brief_initial": {
+    "topic": "帧跃 X1 智能云台开箱",
+    "product": "帧跃 X1 智能云台",
+    "audience": "数码爱好者",
+    "platform": "小红书",
+    "target_duration_sec": 20.0,
+    "style": "开箱测评",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "帧跃 X1 智能云台开箱",
+    "product": "帧跃 X1 智能云台",
+    "audience": "数码爱好者",
+    "platform": "小红书",
+    "target_duration_sec": 20.0,
+    "style": "开箱测评",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 3,
+    "tool_calls_used": 4,
+    "tool_call_counts": {
+      "search_materials": 3,
+      "request_user_input": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "questions": [
+    "素材库里目前只有「帧跃剪辑 App」和「帧跃 M2 无线麦克风」，没有「帧跃 X1 智能云台」。请问 X1 智能云台是否已上市？如果已上市，能否提供它的官方参数/卖点资料（如稳定精度、续航、重量、折叠尺寸、价格、配件清单）？",
+    "如果暂时没有 X1 的素材，是否改为开箱「帧跃 M2 无线麦克风」或「帧跃剪辑 App」？",
+    "开箱视频里是否必须出现价格、购买渠道或优惠信息？如有，请提供准确数字。"
+  ],
+  "missing": [
+    "帧跃 X1 智能云台的产品事实素材（功能/参数/价格/配件）"
+  ]
+}

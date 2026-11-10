@@ -1,0 +1,12 @@
+{
+  "case_id": "03_missing_info",
+  "description": "缺关键信息：只说了产品，没有平台和目标时长",
+  "covers": [
+    "缺关键信息"
+  ],
+  "brief": {
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本",
+    "product": "帧跃 M2 无线麦克风"
+  },
+  "run_options": {}
+}

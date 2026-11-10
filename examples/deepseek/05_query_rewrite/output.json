@@ -1,0 +1,207 @@
+{
+  "case_id": "05_query_rewrite",
+  "case_description": "检索无结果后改写：用户把品牌写成“帧越”、产品叫法不标准",
+  "status": "completed",
+  "status_reason": "脚本 v2 已通过时长与规则检查",
+  "title": "上班族口播收音，别再靠手机原声",
+  "platform": "抖音",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": 19.5,
+  "script_version": "v2",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 4.1,
+      "visual": "办公室工位，人物对着手机口播，画面出现空调、风扇噪音波纹",
+      "narration": "上班族做口播，最怕空调风扇底噪。",
+      "subtitle": "口播最怕底噪",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 3.8,
+      "visual": "手持帧跃 M2 发射器夹在领口特写，屏幕弹出 AI 降噪开关",
+      "narration": "帧跃 M2 领夹麦，一键 AI 降噪。",
+      "subtitle": "帧跃 M2 一键 AI 降噪",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 5.3,
+      "visual": "分屏对比：降噪前后人声波形与评分数字 3.1→4.3",
+      "narration": "内部测试，清晰度评分 3.1 升到 4.3。",
+      "subtitle": "清晰度 3.1→4.3 分",
+      "screen_note": "数据来自内部小样本测试，仅供参考",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M04"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 4.0,
+      "visual": "接收器插上手机，直接开录，无需打开 App",
+      "narration": "接收器插上手机就用，不用装 App。",
+      "subtitle": "插上就用，免装 App",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M05"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": 2.3,
+      "visual": "产品与价格卡：首发价 399 元，含 1 发射器 + 1 接收器",
+      "narration": "首发 399 元。",
+      "subtitle": "首发价 399 元",
+      "screen_note": "价格以官方页面为准",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M06"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M04",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "effect_data",
+      "fact": "内部测试（20 名测试者，约 65dB 咖啡馆环境）：开启 AI 降噪后，人声清晰度主观评分由 3.1 分提升至 4.3 分（5 分制）。",
+      "source": "M2 内部听感测试报告 2026-09（合成）",
+      "required_disclaimer": "数据来自内部小样本测试，仅供参考"
+    },
+    {
+      "id": "M05",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本，插上手机即可使用，无需安装 App。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M06",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "price",
+      "fact": "帧跃 M2 首发价 399 元（含 1 个发射器和 1 个接收器），活动时间 2026-11-11 至 2026-11-20。",
+      "source": "M2 上市活动 brief（合成）",
+      "required_disclaimer": "价格以官方页面为准"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 19.5,
+      "allowed_range_sec": [
+        16.0,
+        20.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 4.2,
+      "script_version": "v2"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v2"
+    }
+  },
+  "risks": [
+    "简报产品名写作“帧越 M2 领夹麦”，素材库实际产品为“帧跃 M2 无线麦克风”，脚本按素材库正确名称“帧跃”撰写，请确认品牌写法",
+    "受众“想做知识口播的上班族”与抖音干货风格为简报给定，未额外核实",
+    "续航 8 小时、50 米传输距离等素材未使用，因 20 秒时长无法容纳且需附加免责说明",
+    "价格 399 元为 2026-11-11 至 11-20 首发活动价，若投放时间不在活动期内需替换或删除该镜头",
+    "镜头3 的清晰度评分来自内部 20 人小样本测试，已在角标标注，不代表普遍效果"
+  ],
+  "system_notes": [],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 26.6,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 19.5,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧越 M2 领夹麦 卖点 参数",
+        "product": "帧越 M2 领夹麦",
+        "count": 0
+      },
+      {
+        "query": "帧跃 M2 无线麦克风 领夹 收音 卖点 参数",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": "上班族口播收音",
+    "product": "帧越 M2 领夹麦",
+    "audience": "想做知识口播的上班族",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "上班族口播收音",
+    "product": "帧越 M2 领夹麦",
+    "audience": "想做知识口播的上班族",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 6,
+    "tool_calls_used": 6,
+    "tool_call_counts": {
+      "search_materials": 2,
+      "estimate_duration": 2,
+      "check_rules": 1,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  }
+}

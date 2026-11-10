@@ -1,0 +1,85 @@
+{
+  "case_id": "03_missing_info",
+  "case_description": "缺关键信息：只说了产品，没有平台和目标时长",
+  "status": "needs_input",
+  "status_reason": "缺少必要信息/素材，已向用户提出补充请求",
+  "title": null,
+  "platform": null,
+  "target_duration_sec": null,
+  "estimated_total_sec": null,
+  "script_version": null,
+  "shots": [],
+  "sources": [],
+  "checks": {
+    "duration": null,
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [],
+  "revision_history": [],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 卖点",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": null,
+    "product": "帧跃 M2 无线麦克风",
+    "audience": null,
+    "platform": null,
+    "target_duration_sec": null,
+    "style": null,
+    "must_include": [],
+    "extra_requirements": null,
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本"
+  },
+  "brief_final": {
+    "topic": null,
+    "product": "帧跃 M2 无线麦克风",
+    "audience": null,
+    "platform": null,
+    "target_duration_sec": null,
+    "style": null,
+    "must_include": [],
+    "extra_requirements": null,
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本"
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 1,
+    "tool_calls_used": 2,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "request_user_input": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "questions": [
+    "这条视频发在哪个平台？（抖音/小红书/视频号/B站等，影响调性与标题字数）",
+    "目标时长是多少秒？（例如 30 秒、60 秒）",
+    "目标受众是谁？（例如口播博主、探店拍摄、直播带货、新手vlog）",
+    "风格偏好？（例如测评口播、剧情种草、快节奏带货）"
+  ],
+  "missing": [
+    "platform",
+    "target_duration_sec",
+    "audience",
+    "style"
+  ]
+}

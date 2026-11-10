@@ -1,0 +1,179 @@
+{
+  "case_id": "07_tool_failure_permanent",
+  "case_description": "工具失败（不可恢复）：estimate_duration 一直返回 503",
+  "status": "failed",
+  "status_reason": "estimate_duration 服务连续 3 次返回 HTTP 503（retryable=true），无法获得权威时长结果；按硬性原则，未通过时长估算的脚本不能提交，因此本轮无法交付已校验脚本。",
+  "title": "新手博主别再手打字幕了",
+  "platform": "抖音",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": null,
+  "script_version": "v1",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": null,
+      "visual": "手机屏幕：博主对着视频逐字敲字幕，眉头紧皱，画面快速放大",
+      "narration": "还在一个字一个字敲字幕？",
+      "subtitle": "还在手打字幕？",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": null,
+      "visual": "打开帧跃剪辑 App，导入一段口播视频，界面清晰展示",
+      "narration": "用帧跃剪辑，导入视频就能自动生成字幕。",
+      "subtitle": "帧跃剪辑：导入即生成字幕",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": null,
+      "visual": "字幕条逐句出现在时间轴上，镜头特写",
+      "narration": "它识别视频里的普通话语音，一句一句对上。",
+      "subtitle": "识别普通话语音，逐句生成",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": null,
+      "visual": "手指点开某一句字幕，修改错字，点击确认",
+      "narration": "生成后还能逐句手动改，错字自己修。",
+      "subtitle": "生成后可逐句手动修改",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": null,
+      "visual": "成片播放，字幕整齐滚动，画面定格品牌 Logo",
+      "narration": "帧跃，让每一帧都好好表达。",
+      "subtitle": "帧跃，让每一帧都好好表达",
+      "screen_note": "功能以 App 内实际版本为准",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "B01"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "B01",
+      "product": "帧跃（品牌通用）",
+      "type": "brand",
+      "fact": "品牌口号：帧跃，让每一帧都好好表达。",
+      "source": "帧跃品牌手册 2026（合成）"
+    },
+    {
+      "id": "P01",
+      "product": "帧跃剪辑 App",
+      "type": "feature",
+      "fact": "帧跃剪辑 App 支持字幕功能：可识别视频中的普通话语音并自动生成字幕，生成后可逐句手动修改。",
+      "source": "帧跃剪辑功能说明 v3.2（合成）"
+    }
+  ],
+  "checks": {
+    "duration": null,
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [
+    "工具调用失败 3 次：['estimate_duration: SERVICE_UNAVAILABLE', 'estimate_duration: SERVICE_UNAVAILABLE', 'estimate_duration: SERVICE_UNAVAILABLE']",
+    "附带的脚本 v1 未通过全部检查，不可直接发布"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": null,
+      "duration": "未估算",
+      "rules": "未检查"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃剪辑 App 自动字幕 功能",
+        "product": "帧跃剪辑 App",
+        "count": 1
+      },
+      {
+        "query": "帧跃剪辑 自动字幕 识别 准确率 支持语言",
+        "product": null,
+        "count": 1
+      },
+      {
+        "query": "帧跃剪辑 品牌 价格 免费 会员",
+        "product": "帧跃剪辑 App",
+        "count": 2
+      }
+    ],
+    "retrieved_ids": [
+      "B01",
+      "P01"
+    ]
+  },
+  "brief_initial": {
+    "topic": "帧跃剪辑自动字幕",
+    "product": "帧跃剪辑 App",
+    "audience": "新手博主",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "帧跃剪辑自动字幕",
+    "product": "帧跃剪辑 App",
+    "audience": "新手博主",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 6,
+    "tool_calls_used": 7,
+    "tool_call_counts": {
+      "search_materials": 3,
+      "estimate_duration": 3,
+      "report_failure": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "failure": {
+    "reason": "estimate_duration 服务连续 3 次返回 HTTP 503（retryable=true），无法获得权威时长结果；按硬性原则，未通过时长估算的脚本不能提交，因此本轮无法交付已校验脚本。",
+    "failed_checks": [
+      "estimate_duration 服务不可用（HTTP 503，连续3次）",
+      "check_rules 未执行（依赖时长校验通过后再检查）",
+      "submit_script 未调用（同版本脚本未通过时长与规则校验）"
+    ],
+    "suggestions": [
+      "稍后重试：服务恢复后我会立即重新估算时长并跑规则检查，再提交",
+      "若急需出稿：可先按下方草稿人工试读，旁白约 60 字，按 4.2 字/秒约 14-15 秒，可能略短于 20 秒目标，可补一句使用场景（需有素材依据）",
+      "素材库目前只有 1 条功能事实（P01：识别普通话语音自动生成字幕、生成后可逐句手动修改）和 1 条品牌口号（B01），无效果数据；如需写效率提升类结论，请补充带数据的素材"
+    ]
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "case_id": "09_rule_violation",
+  "case_description": "规则检查不通过后修正：用户要求开头用极限词“全网最强”",
+  "status": "completed",
+  "status_reason": "脚本 v5 已通过时长与规则检查",
+  "title": "咖啡馆录口播也清楚",
+  "platform": "小红书",
+  "target_duration_sec": 25.0,
+  "estimated_total_sec": 20.7,
+  "script_version": "v5",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 1.5,
+      "visual": "近景：创作者对着镜头皱眉，画面略显杂乱",
+      "narration": "收音神器！",
+      "subtitle": "收音神器",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 7.8,
+      "visual": "产品特写 + 讲解（对应 M01）",
+      "narration": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "subtitle": "帧跃 M2 支持一键开启 AI",
+      "screen_note": "",
+      "hold_sec": 7.8,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 5.1,
+      "visual": "屏幕录制/实拍演示该功能（对应 M01）",
+      "narration": "",
+      "subtitle": "实际操作演示",
+      "screen_note": "",
+      "hold_sec": 5.1,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 6.3,
+      "visual": "产品 logo 定格 + 关注引导",
+      "narration": "帧跃 M2 无线麦克风，去试试吧，评论区聊聊你的拍摄需求。",
+      "subtitle": "评论区聊聊你的需求",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 20.7,
+      "allowed_range_sec": [
+        20.0,
+        25.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 4.5,
+      "script_version": "v5"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v5"
+    }
+  },
+  "risks": [
+    "用户要求中的“全网”属于广告极限词，已删除",
+    "用户要求中的“最强”属于广告极限词，已删除"
+  ],
+  "system_notes": [
+    "离线 Mock 策略运行：只验证流程与工具链，不代表真实模型的决策效果"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 30.2,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 19.4,
+      "duration": "under",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 20.8,
+      "duration": "ok",
+      "rules": [
+        "BANNED_WORD"
+      ]
+    },
+    {
+      "version": "v4",
+      "estimated_sec": 19.9,
+      "duration": "under",
+      "rules": "未检查"
+    },
+    {
+      "version": "v5",
+      "estimated_sec": 20.7,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 咖啡馆录口播也清楚",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": "咖啡馆录口播也清楚",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "探店博主",
+    "platform": "小红书",
+    "target_duration_sec": 25.0,
+    "style": "轻松种草",
+    "must_include": [],
+    "extra_requirements": "开头一定要用“全网最强收音神器”这句话",
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "咖啡馆录口播也清楚",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "探店博主",
+    "platform": "小红书",
+    "target_duration_sec": 25.0,
+    "style": "轻松种草",
+    "must_include": [],
+    "extra_requirements": "开头一定要用“全网最强收音神器”这句话",
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "mock/rule-policy",
+    "steps_used": 9,
+    "tool_calls_used": 9,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "estimate_duration": 5,
+      "check_rules": 2,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  }
+}

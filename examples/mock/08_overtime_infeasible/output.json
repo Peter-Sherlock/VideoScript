@@ -1,0 +1,273 @@
+{
+  "case_id": "08_overtime_infeasible",
+  "case_description": "超时长且无法修正：3 秒贴片必须讲全 7 个要点（即使把要点原词直接拼成一行字幕、不配口播，按工具口径最短也要约 3.6 秒）",
+  "status": "failed",
+  "status_reason": "在保留用户必含要点 ['降噪', '续航', '传输距离', '399', 'Type-C', 'Lightning', '首发价'] 的前提下，最短也需要 30.7s，超出允许区间 [2.4, 3.0]s，无法同时满足",
+  "title": "帧跃 M2 3 秒贴片广告",
+  "platform": "抖音",
+  "target_duration_sec": 3.0,
+  "estimated_total_sec": 30.7,
+  "script_version": "v4",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 2.8,
+      "visual": "近景：创作者对着镜头皱眉，画面略显杂乱",
+      "narration": "拍视频，这个细节别忽略。",
+      "subtitle": "这个细节别忽略",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 3.4,
+      "visual": "产品特写 + 讲解（对应 M01）",
+      "narration": "帧跃 M2 支持一键开启 AI 降噪。",
+      "subtitle": "帧跃 M2 支持一键开启 AI",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 2.0,
+      "visual": "屏幕录制/实拍演示该功能（对应 M01）",
+      "narration": "",
+      "subtitle": "实际操作演示",
+      "screen_note": "",
+      "hold_sec": 2.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 3.3,
+      "visual": "产品特写 + 讲解（对应 M02）",
+      "narration": "帧跃 M2 发射器续航约 8 小时。",
+      "subtitle": "帧跃 M2 发射器续航约 8 小",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M02"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": 5.5,
+      "visual": "产品特写 + 讲解（对应 M03）",
+      "narration": "帧跃 M2 在空旷无遮挡环境下有效传输距离约 50 米。",
+      "subtitle": "帧跃 M2 在空旷无遮挡环境下有",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M03"
+      ]
+    },
+    {
+      "shot_id": 6,
+      "duration_sec": 4.8,
+      "visual": "产品特写 + 讲解（对应 M05）",
+      "narration": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本。",
+      "subtitle": "帧跃 M2 接收器提供 Type",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M05"
+      ]
+    },
+    {
+      "shot_id": 7,
+      "duration_sec": 3.1,
+      "visual": "产品特写 + 讲解（对应 M06）",
+      "narration": "帧跃 M2 首发价 399 元。",
+      "subtitle": "帧跃 M2 首发价 399 元",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M06"
+      ]
+    },
+    {
+      "shot_id": 8,
+      "duration_sec": 5.8,
+      "visual": "产品 logo 定格 + 关注引导",
+      "narration": "帧跃 M2 无线麦克风，去试试吧，评论区聊聊你的拍摄需求。",
+      "subtitle": "评论区聊聊你的需求",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M02",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 发射器续航约 8 小时（单次充满连续录音，实验室条件，关闭降噪）。",
+      "source": "M2 产品规格书 v1.0（合成）",
+      "required_disclaimer": "续航为实验室数据，实际以使用环境为准"
+    },
+    {
+      "id": "M03",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 在空旷无遮挡环境下有效传输距离约 50 米。",
+      "source": "M2 产品规格书 v1.0（合成）",
+      "required_disclaimer": "传输距离为空旷环境测试值"
+    },
+    {
+      "id": "M05",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本，插上手机即可使用，无需安装 App。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M06",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "price",
+      "fact": "帧跃 M2 首发价 399 元（含 1 个发射器和 1 个接收器），活动时间 2026-11-11 至 2026-11-20。",
+      "source": "M2 上市活动 brief（合成）",
+      "required_disclaimer": "价格以官方页面为准"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": false,
+      "status": "over",
+      "total_sec": 30.7,
+      "allowed_range_sec": [
+        2.4,
+        3.0
+      ],
+      "delta_sec": 27.7,
+      "speech_rate_cps": 5.0,
+      "script_version": "v4"
+    },
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [
+    "附带的脚本 v4 未通过全部检查，不可直接发布",
+    "离线 Mock 策略运行：只验证流程与工具链，不代表真实模型的决策效果"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 73.0,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 45.3,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 34.0,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v4",
+      "estimated_sec": 30.7,
+      "duration": "over",
+      "rules": "未检查"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 帧跃 M2 3 秒贴片广告",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": "帧跃 M2 3 秒贴片广告",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "数码爱好者",
+    "platform": "抖音",
+    "target_duration_sec": 3.0,
+    "style": "快节奏",
+    "must_include": [
+      "降噪",
+      "续航",
+      "传输距离",
+      "399",
+      "Type-C",
+      "Lightning",
+      "首发价"
+    ],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "帧跃 M2 3 秒贴片广告",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "数码爱好者",
+    "platform": "抖音",
+    "target_duration_sec": 3.0,
+    "style": "快节奏",
+    "must_include": [
+      "降噪",
+      "续航",
+      "传输距离",
+      "399",
+      "Type-C",
+      "Lightning",
+      "首发价"
+    ],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "mock/rule-policy",
+    "steps_used": 6,
+    "tool_calls_used": 6,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "estimate_duration": 4,
+      "report_failure": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "failure": {
+    "reason": "在保留用户必含要点 ['降噪', '续航', '传输距离', '399', 'Type-C', 'Lightning', '首发价'] 的前提下，最短也需要 30.7s，超出允许区间 [2.4, 3.0]s，无法同时满足",
+    "failed_checks": [
+      "estimate_duration"
+    ],
+    "suggestions": [
+      "把目标时长放宽到约 32 秒",
+      "或减少必含要点"
+    ]
+  }
+}

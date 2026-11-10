@@ -1,0 +1,238 @@
+{
+  "case_id": "09_rule_violation",
+  "case_description": "规则检查不通过后修正：用户要求开头用极限词“全网最强”",
+  "status": "failed",
+  "status_reason": "estimate_duration 已达单工具调用上限（8 次），无法再验证新版本时长；且 check_rules 尚未执行。当前最接近的版本 v6 总时长 25.1s，仅超出目标上限 0.1s（目标 25s，允许区间 20–25s），未能通过时长校验，因此不能提交。",
+  "title": "咖啡馆录口播也清楚｜帧跃 M2 无线麦克风",
+  "platform": "小红书",
+  "target_duration_sec": 25.0,
+  "estimated_total_sec": 25.1,
+  "script_version": "v6",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 3.4,
+      "visual": "博主坐在咖啡馆窗边，手持帧跃 M2 发射器怼镜头",
+      "narration": "全网最强收音神器，我找到了。",
+      "subtitle": "全网最强收音神器",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 7.3,
+      "visual": "镜头扫过空调出风口与咖啡机，手指按下发射器降噪键",
+      "narration": "咖啡馆录口播最怕底噪，帧跃 M2 一键 AI 降噪，空调风扇声都能压住。",
+      "subtitle": "一键 AI 降噪，压住底噪",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 6.8,
+      "visual": "分屏对比：降噪前后波形与听感评分字幕",
+      "narration": "内部测试 65 分贝咖啡馆，清晰度评分 3.1 升到 4.3。",
+      "subtitle": "清晰度评分 3.1 → 4.3",
+      "screen_note": "数据来自内部小样本测试，仅供参考",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M04"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 4.8,
+      "visual": "接收器插上手机直接开录，博主走到店外远处继续录",
+      "narration": "插上手机就能用，空旷环境传输约 50 米。",
+      "subtitle": "免装 App，传输约 50 米",
+      "screen_note": "传输距离为空旷环境测试值",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M03",
+        "M05"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": 2.8,
+      "visual": "产品与价格卡同框，博主比心",
+      "narration": "首发 399，探店冲。",
+      "subtitle": "首发 399 元",
+      "screen_note": "价格以官方页面为准",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M06"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M03",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 在空旷无遮挡环境下有效传输距离约 50 米。",
+      "source": "M2 产品规格书 v1.0（合成）",
+      "required_disclaimer": "传输距离为空旷环境测试值"
+    },
+    {
+      "id": "M04",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "effect_data",
+      "fact": "内部测试（20 名测试者，约 65dB 咖啡馆环境）：开启 AI 降噪后，人声清晰度主观评分由 3.1 分提升至 4.3 分（5 分制）。",
+      "source": "M2 内部听感测试报告 2026-09（合成）",
+      "required_disclaimer": "数据来自内部小样本测试，仅供参考"
+    },
+    {
+      "id": "M05",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本，插上手机即可使用，无需安装 App。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M06",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "price",
+      "fact": "帧跃 M2 首发价 399 元（含 1 个发射器和 1 个接收器），活动时间 2026-11-11 至 2026-11-20。",
+      "source": "M2 上市活动 brief（合成）",
+      "required_disclaimer": "价格以官方页面为准"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": false,
+      "status": "over",
+      "total_sec": 25.1,
+      "allowed_range_sec": [
+        20.0,
+        25.0
+      ],
+      "delta_sec": 0.1,
+      "speech_rate_cps": 4.5,
+      "script_version": "v6"
+    },
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [
+    "附带的脚本 v6 未通过全部检查，不可直接发布"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 34.0,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 27.7,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 26.2,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v4",
+      "estimated_sec": 25.7,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v5",
+      "estimated_sec": 25.5,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v6",
+      "estimated_sec": 25.1,
+      "duration": "over",
+      "rules": "未检查"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 收音 降噪 续航",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": "咖啡馆录口播也清楚",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "探店博主",
+    "platform": "小红书",
+    "target_duration_sec": 25.0,
+    "style": "轻松种草",
+    "must_include": [],
+    "extra_requirements": "开头一定要用“全网最强收音神器”这句话",
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "咖啡馆录口播也清楚",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "探店博主",
+    "platform": "小红书",
+    "target_duration_sec": 25.0,
+    "style": "轻松种草",
+    "must_include": [],
+    "extra_requirements": "开头一定要用“全网最强收音神器”这句话",
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 11,
+    "tool_calls_used": 11,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "estimate_duration": 8,
+      "report_failure": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "failure": {
+    "reason": "estimate_duration 已达单工具调用上限（8 次），无法再验证新版本时长；且 check_rules 尚未执行。当前最接近的版本 v6 总时长 25.1s，仅超出目标上限 0.1s（目标 25s，允许区间 20–25s），未能通过时长校验，因此不能提交。",
+    "failed_checks": [
+      "estimate_duration：v6 总时长 25.1s，超出上限 0.1s，未通过",
+      "check_rules：尚未执行（工具预算耗尽）"
+    ],
+    "suggestions": [
+      "将目标时长放宽到 26–28s，v6 版本可直接使用，无需再删内容",
+      "或允许删掉镜头4中的“传输约 50 米”这一卖点（约省 2s），即可稳定落在 25s 内",
+      "或把镜头1钩子句“全网最强收音神器，我找到了”缩短为“全网最强收音神器”（约省 1s）",
+      "若需保留全部卖点，建议把目标时长设为 30s，节奏更自然、种草感更强"
+    ]
+  }
+}

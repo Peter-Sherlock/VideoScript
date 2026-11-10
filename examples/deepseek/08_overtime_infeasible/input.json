@@ -1,0 +1,25 @@
+{
+  "case_id": "08_overtime_infeasible",
+  "description": "超时长且无法修正：3 秒贴片必须讲全 7 个要点（即使把要点原词直接拼成一行字幕、不配口播，按工具口径最短也要约 3.6 秒）",
+  "covers": [
+    "超时长后明确失败"
+  ],
+  "brief": {
+    "topic": "帧跃 M2 3 秒贴片广告",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "数码爱好者",
+    "platform": "抖音",
+    "target_duration_sec": 3,
+    "style": "快节奏",
+    "must_include": [
+      "降噪",
+      "续航",
+      "传输距离",
+      "399",
+      "Type-C",
+      "Lightning",
+      "首发价"
+    ]
+  },
+  "run_options": {}
+}

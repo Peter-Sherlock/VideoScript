@@ -1,0 +1,16 @@
+{
+  "case_id": "09_rule_violation",
+  "description": "规则检查不通过后修正：用户要求开头用极限词“全网最强”",
+  "covers": [
+    "规则检查不通过→修改再检查"
+  ],
+  "brief": {
+    "topic": "咖啡馆录口播也清楚",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "探店博主",
+    "platform": "小红书",
+    "target_duration_sec": 25,
+    "style": "轻松种草",
+    "extra_requirements": "开头一定要用“全网最强收音神器”这句话"
+  }
+}

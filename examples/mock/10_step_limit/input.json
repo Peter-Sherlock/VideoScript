@@ -1,0 +1,20 @@
+{
+  "case_id": "10_step_limit",
+  "description": "执行上限：把决策轮数限制为 3，验证返回明确的 incomplete 状态",
+  "covers": [
+    "执行上限"
+  ],
+  "brief": {
+    "topic": "vlog 新手收音避坑",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "vlog 新手",
+    "platform": "抖音",
+    "target_duration_sec": 30,
+    "style": "轻松种草"
+  },
+  "run_options": {
+    "limits": {
+      "max_steps": 3
+    }
+  }
+}

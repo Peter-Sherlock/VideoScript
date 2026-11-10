@@ -1,0 +1,20 @@
+{
+  "case_id": "06_tool_failure_transient",
+  "description": "工具失败（可恢复）：search_materials 第一次超时",
+  "covers": [
+    "工具失败"
+  ],
+  "brief": {
+    "topic": "vlog 新手收音避坑：帧跃 M2 无线麦克风",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "刚开始拍 vlog 的新手创作者",
+    "platform": "抖音",
+    "target_duration_sec": 30,
+    "style": "轻松种草"
+  },
+  "run_options": {
+    "faults": [
+      "search_materials:transient:1"
+    ]
+  }
+}

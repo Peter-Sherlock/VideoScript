@@ -1,0 +1,81 @@
+{
+  "case_id": "04_no_material",
+  "case_description": "无素材：素材库里没有“帧跃 X1 智能云台”",
+  "status": "needs_input",
+  "status_reason": "缺少必要信息/素材，已向用户提出补充请求",
+  "title": null,
+  "platform": "小红书",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": null,
+  "script_version": null,
+  "shots": [],
+  "sources": [],
+  "checks": {
+    "duration": null,
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [],
+  "revision_history": [],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 X1 智能云台 功能 参数 卖点",
+        "product": "帧跃 X1 智能云台",
+        "count": 0
+      },
+      {
+        "query": "帧跃 云台 稳定器 手持 防抖",
+        "product": null,
+        "count": 0
+      }
+    ],
+    "retrieved_ids": []
+  },
+  "brief_initial": {
+    "topic": "帧跃 X1 智能云台开箱",
+    "product": "帧跃 X1 智能云台",
+    "audience": "数码爱好者",
+    "platform": "小红书",
+    "target_duration_sec": 20.0,
+    "style": "开箱测评",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "帧跃 X1 智能云台开箱",
+    "product": "帧跃 X1 智能云台",
+    "audience": "数码爱好者",
+    "platform": "小红书",
+    "target_duration_sec": 20.0,
+    "style": "开箱测评",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 3,
+    "tool_calls_used": 3,
+    "tool_call_counts": {
+      "search_materials": 2,
+      "request_user_input": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "questions": [
+    "素材库中目前只有「帧跃剪辑 App」和「帧跃 M2 无线麦克风」，没有「帧跃 X1 智能云台」。请问：是否产品名有误（例如实际是 M2 无线麦克风或剪辑 App）？",
+    "如果确实是帧跃 X1 智能云台，请提供可用事实素材：核心功能/参数（如防抖、轴数、续航、重量、承重）、价格、品牌信息，以及是否有实测效果数据。",
+    "是否接受先按现有素材（帧跃 M2 无线麦克风或帧跃剪辑 App）做同风格开箱脚本？"
+  ],
+  "missing": [
+    "帧跃 X1 智能云台的产品事实素材（功能/参数/价格/品牌/效果数据）"
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "case_id": "07_tool_failure_permanent",
+  "case_description": "工具失败（不可恢复）：estimate_duration 一直返回 503",
+  "status": "failed",
+  "status_reason": "时长估算连续失败（SERVICE_UNAVAILABLE），无法完成必要的检查，不能交付未验证的脚本",
+  "title": "帧跃剪辑自动字幕",
+  "platform": "抖音",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": null,
+  "script_version": "v1",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": null,
+      "visual": "近景：创作者对着镜头皱眉，画面略显杂乱",
+      "narration": "拍视频的你，是不是也常被这些细节卡住？",
+      "subtitle": "拍视频的你",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": null,
+      "visual": "产品特写 + 讲解（对应 P01）",
+      "narration": "帧跃剪辑 App 支持字幕功能：可识别视频中的普通话语音并自动生成字幕，生成后可逐句手动修改。这一点在日常拍摄里特别实用，不用再额外折腾。",
+      "subtitle": "帧跃剪辑 App 支持字幕功能",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": null,
+      "visual": "屏幕录制/实拍演示该功能（对应 P01）",
+      "narration": "",
+      "subtitle": "实际操作演示",
+      "screen_note": "",
+      "hold_sec": 4.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": null,
+      "visual": "生活场景混剪：户外 vlog、室内口播",
+      "narration": "不管是出门拍 vlog，还是在家录口播教程，都能派上用场。",
+      "subtitle": "vlog、口播都能用",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": null,
+      "visual": "产品 logo 定格 + 关注引导",
+      "narration": "帧跃剪辑 App，去试试吧，评论区聊聊你的拍摄需求。",
+      "subtitle": "评论区聊聊你的需求",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "P01",
+      "product": "帧跃剪辑 App",
+      "type": "feature",
+      "fact": "帧跃剪辑 App 支持字幕功能：可识别视频中的普通话语音并自动生成字幕，生成后可逐句手动修改。",
+      "source": "帧跃剪辑功能说明 v3.2（合成）"
+    }
+  ],
+  "checks": {
+    "duration": null,
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [
+    "工具调用失败 2 次：['estimate_duration: SERVICE_UNAVAILABLE', 'estimate_duration: SERVICE_UNAVAILABLE']",
+    "附带的脚本 v1 未通过全部检查，不可直接发布",
+    "离线 Mock 策略运行：只验证流程与工具链，不代表真实模型的决策效果"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": null,
+      "duration": "未估算",
+      "rules": "未检查"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃剪辑 App 帧跃剪辑自动字幕",
+        "product": "帧跃剪辑 App",
+        "count": 1
+      }
+    ],
+    "retrieved_ids": [
+      "P01"
+    ]
+  },
+  "brief_initial": {
+    "topic": "帧跃剪辑自动字幕",
+    "product": "帧跃剪辑 App",
+    "audience": "新手博主",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "帧跃剪辑自动字幕",
+    "product": "帧跃剪辑 App",
+    "audience": "新手博主",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "mock/rule-policy",
+    "steps_used": 4,
+    "tool_calls_used": 4,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "estimate_duration": 2,
+      "report_failure": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "failure": {
+    "reason": "时长估算连续失败（SERVICE_UNAVAILABLE），无法完成必要的检查，不能交付未验证的脚本",
+    "failed_checks": [
+      "estimate_duration"
+    ],
+    "suggestions": [
+      "稍后重试",
+      "或由人工核对时长/规则后再发布"
+    ]
+  }
+}

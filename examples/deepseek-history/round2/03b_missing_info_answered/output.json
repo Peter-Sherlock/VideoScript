@@ -1,0 +1,222 @@
+{
+  "case_id": "03b_missing_info_answered",
+  "case_description": "缺关键信息 + 用户补充后继续：预置用户回答“发抖音，20 秒左右”",
+  "status": "completed",
+  "status_reason": "脚本 v5 已通过时长与规则检查",
+  "title": "上班族口播神器！帧跃M2麦克风",
+  "platform": "抖音",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": 17.8,
+  "script_version": "v5",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 3.5,
+      "visual": "办公室工位，手机架起，主角小声说话，背景空调嗡嗡响",
+      "narration": "办公室录口播，空调声全收进去了？",
+      "subtitle": "空调声全收进去了？",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 6.3,
+      "visual": "特写按下按键，环境声变干净，分屏对比波形+清晰度评分字卡",
+      "narration": "帧跃 M2 一键 AI 降噪，内部测试清晰度 3.1 提到 4.3 分。",
+      "subtitle": "一键AI降噪，清晰度3.1→4.3",
+      "screen_note": "数据来自内部小样本测试，仅供参考",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M01",
+        "M04"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 4.2,
+      "visual": "接收器插上手机，录音界面直接出现；发射器别在衣领",
+      "narration": "插上手机就用，不用装 App，续航约 8 小时。",
+      "subtitle": "插上就用，续航约8小时",
+      "screen_note": "续航为实验室数据，实际以使用环境为准",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M02",
+        "M05"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 3.8,
+      "visual": "产品全家福+价格字卡，主播手指向下方购物车",
+      "narration": "首发 399 元，含发射器和接收器。",
+      "subtitle": "首发399元",
+      "screen_note": "价格以官方页面为准；活动时间 2026-11-11 至 2026-11-20",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M06"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M02",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 发射器续航约 8 小时（单次充满连续录音，实验室条件，关闭降噪）。",
+      "source": "M2 产品规格书 v1.0（合成）",
+      "required_disclaimer": "续航为实验室数据，实际以使用环境为准"
+    },
+    {
+      "id": "M04",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "effect_data",
+      "fact": "内部测试（20 名测试者，约 65dB 咖啡馆环境）：开启 AI 降噪后，人声清晰度主观评分由 3.1 分提升至 4.3 分（5 分制）。",
+      "source": "M2 内部听感测试报告 2026-09（合成）",
+      "required_disclaimer": "数据来自内部小样本测试，仅供参考"
+    },
+    {
+      "id": "M05",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本，插上手机即可使用，无需安装 App。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M06",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "price",
+      "fact": "帧跃 M2 首发价 399 元（含 1 个发射器和 1 个接收器），活动时间 2026-11-11 至 2026-11-20。",
+      "source": "M2 上市活动 brief（合成）",
+      "required_disclaimer": "价格以官方页面为准"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 17.8,
+      "allowed_range_sec": [
+        16.0,
+        20.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 5.0,
+      "script_version": "v5"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v5"
+    }
+  },
+  "risks": [
+    "受众与风格由用户口头补充（抖音、20秒、想做口播的上班族），已写入简报，但未提供更细的人设/场景偏好",
+    "素材库无 M03 传输距离以外的更多场景数据，50 米传输与 8 小时续航均为实验室/空旷环境值，已在 screen_note 标注免责",
+    "价格 399 元为 2026-11-11 至 2026-11-20 首发活动价，若发布时间不在活动期内需替换价格表述",
+    "未使用用户评价/口碑类素材（素材库无），因此脚本不含用户反馈类内容"
+  ],
+  "system_notes": [],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 34.5,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 23.6,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 21.8,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v4",
+      "estimated_sec": 21.5,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v5",
+      "estimated_sec": 17.8,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 卖点 参数",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": null,
+    "product": "帧跃 M2 无线麦克风",
+    "audience": null,
+    "platform": null,
+    "target_duration_sec": null,
+    "style": null,
+    "must_include": [],
+    "extra_requirements": null,
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本",
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": null,
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "想做口播的上班族",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "快节奏口播带货",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本",
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 9,
+    "tool_calls_used": 10,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "request_user_input": 1,
+      "update_brief": 1,
+      "estimate_duration": 5,
+      "check_rules": 1,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "user_replies": [
+    "发抖音，20 秒左右，面向想做口播的上班族"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "_note": "合成的品牌与平台规则，供 check_rules / estimate_duration 工具使用。",
+  "brand_mention_required": true,
+  "banned_words": [
+    "最好", "最强", "最佳", "最快", "最低价", "最便宜", "最优", "最先进",
+    "No.1", "NO.1", "顶级", "极致", "100%", "百分百", "绝对", "完美",
+    "零噪音", "零噪声", "永久", "万能", "全网", "史上", "唯一", "国家级", "世界级", "首选"
+  ],
+  "banned_regex": [
+    {"pattern": "第一(?!步|次|个|镜|天|时间|眼|期|集|句|条)", "label": "第一"}
+  ],
+  "feature_lexicon": [
+    "字幕", "语音识别", "降噪", "续航", "传输距离", "接口", "Type-C", "Lightning",
+    "防水", "防风", "翻译", "多语言", "美颜", "4K", "云同步", "自动剪辑", "AI配音",
+    "模板", "滤镜", "调色", "抠像", "变声", "混响", "监听", "一拖二", "蓝牙", "快充"
+  ],
+  "claim_markers": ["支持", "可以", "能", "具备", "自带", "一键", "帮你", "让你", "搭载", "拥有", "提供"],
+  "effect_verbs":["提升", "提高", "增加", "增长", "降低", "减少", "节省", "缩短", "加快", "翻倍"],
+  "intensifiers": ["大幅", "显著", "极大", "成倍", "数倍", "飞跃", "质的"],
+  "efficiency_nouns": ["效率", "速度", "工作量", "时间成本", "成本"],
+  "platform_rules": {
+    "douyin": {"label": "抖音", "title_max_chars": 30},
+    "xiaohongshu": {"label": "小红书", "title_max_chars": 20},
+    "shipinhao": {"label": "视频号", "title_max_chars": 30},
+    "bilibili": {"label": "B站", "title_max_chars": 40},
+    "kuaishou": {"label": "快手", "title_max_chars": 30},
+    "default": {"label": "其他平台", "title_max_chars": 30}
+  },
+  "platform_aliases": {
+    "抖音": "douyin", "douyin": "douyin", "tiktok": "douyin",
+    "小红书": "xiaohongshu", "xiaohongshu": "xiaohongshu", "红书": "xiaohongshu",
+    "视频号": "shipinhao", "微信视频号": "shipinhao", "shipinhao": "shipinhao",
+    "b站": "bilibili", "哔哩哔哩": "bilibili", "bilibili": "bilibili",
+    "快手": "kuaishou", "kuaishou": "kuaishou"
+  },
+  "duration_policy": {
+    "lower_ratio": 0.8,
+    "upper_ratio": 1.0,
+    "default_chars_per_sec": 4.5,
+    "style_chars_per_sec": [
+      {"keywords": ["快节奏", "带货", "快速", "紧凑"], "cps": 5.0},
+      {"keywords": ["讲解", "专业", "干货", "教程", "测评"], "cps": 4.2},
+      {"keywords": ["治愈", "舒缓", "温柔", "情感", "慢"], "cps": 3.8}
+    ],
+    "subtitle_read_cps": 6.0,
+    "min_shot_sec": 1.5,
+    "shot_transition_sec": 0.3,
+    "minor_pause_sec": 0.15,
+    "major_pause_sec": 0.3
+  }
+}

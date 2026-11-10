@@ -1,0 +1,16 @@
+{
+  "case_id": "05_query_rewrite",
+  "description": "检索无结果后改写：用户把品牌写成“帧越”、产品叫法不标准",
+  "covers": [
+    "检索无结果→改写查询"
+  ],
+  "brief": {
+    "topic": "上班族口播收音",
+    "product": "帧越 M2 领夹麦",
+    "audience": "想做知识口播的上班族",
+    "platform": "抖音",
+    "target_duration_sec": 20,
+    "style": "干货讲解"
+  },
+  "run_options": {}
+}

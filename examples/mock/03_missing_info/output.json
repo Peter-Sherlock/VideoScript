@@ -1,0 +1,71 @@
+{
+  "case_id": "03_missing_info",
+  "case_description": "缺关键信息：只说了产品，没有平台和目标时长",
+  "status": "needs_input",
+  "status_reason": "缺少必要信息/素材，已向用户提出补充请求",
+  "title": null,
+  "platform": null,
+  "target_duration_sec": null,
+  "estimated_total_sec": null,
+  "script_version": null,
+  "shots": [],
+  "sources": [],
+  "checks": {
+    "duration": null,
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [
+    "离线 Mock 策略运行：只验证流程与工具链，不代表真实模型的决策效果"
+  ],
+  "revision_history": [],
+  "retrieval": {
+    "queries": [],
+    "retrieved_ids": []
+  },
+  "brief_initial": {
+    "topic": null,
+    "product": "帧跃 M2 无线麦克风",
+    "audience": null,
+    "platform": null,
+    "target_duration_sec": null,
+    "style": null,
+    "must_include": [],
+    "extra_requirements": null,
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本",
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": null,
+    "product": "帧跃 M2 无线麦克风",
+    "audience": null,
+    "platform": null,
+    "target_duration_sec": null,
+    "style": null,
+    "must_include": [],
+    "extra_requirements": null,
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本",
+    "draft_script": null
+  },
+  "run": {
+    "llm": "mock/rule-policy",
+    "steps_used": 1,
+    "tool_calls_used": 1,
+    "tool_call_counts": {
+      "request_user_input": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "questions": [
+    "准备发布在哪个平台（抖音/小红书/视频号/B站/快手）？",
+    "目标时长是多少秒？"
+  ],
+  "missing": [
+    "platform",
+    "target_duration_sec"
+  ]
+}

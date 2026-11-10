@@ -1,0 +1,172 @@
+{
+  "case_id": "05_query_rewrite",
+  "case_description": "检索无结果后改写：用户把品牌写成“帧越”、产品叫法不标准",
+  "status": "completed",
+  "status_reason": "脚本 v3 已通过时长与规则检查",
+  "title": "上班族口播收音",
+  "platform": "抖音",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": 19.4,
+  "script_version": "v3",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 4.8,
+      "visual": "近景：创作者对着镜头皱眉，画面略显杂乱",
+      "narration": "拍视频的你，是不是也常被这些细节卡住？",
+      "subtitle": "拍视频的你",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 3.9,
+      "visual": "产品特写 + 讲解（对应 M01）",
+      "narration": "帧跃 M2 支持一键开启 AI 降噪。",
+      "subtitle": "帧跃 M2 支持一键开启 AI",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 4.0,
+      "visual": "屏幕录制/实拍演示该功能（对应 M01）",
+      "narration": "",
+      "subtitle": "实际操作演示",
+      "screen_note": "",
+      "hold_sec": 4.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 6.7,
+      "visual": "产品 logo 定格 + 关注引导",
+      "narration": "帧跃 M2 无线麦克风，去试试吧，评论区聊聊你的拍摄需求。",
+      "subtitle": "评论区聊聊你的需求",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 19.4,
+      "allowed_range_sec": [
+        16.0,
+        20.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 4.2,
+      "script_version": "v3"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v3"
+    }
+  },
+  "risks": [],
+  "system_notes": [
+    "离线 Mock 策略运行：只验证流程与工具链，不代表真实模型的决策效果"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 34.1,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 22.6,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 19.4,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧越 M2 领夹麦 上班族口播收音",
+        "product": "帧越 M2 领夹麦",
+        "count": 0
+      },
+      {
+        "query": "帧跃 M2 无线麦克风 卖点",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": "上班族口播收音",
+    "product": "帧越 M2 领夹麦",
+    "audience": "想做知识口播的上班族",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "上班族口播收音",
+    "product": "帧越 M2 领夹麦",
+    "audience": "想做知识口播的上班族",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "mock/rule-policy",
+    "steps_used": 7,
+    "tool_calls_used": 7,
+    "tool_call_counts": {
+      "search_materials": 2,
+      "estimate_duration": 3,
+      "check_rules": 1,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  }
+}

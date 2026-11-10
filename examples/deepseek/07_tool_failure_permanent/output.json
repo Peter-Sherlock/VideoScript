@@ -1,0 +1,173 @@
+{
+  "case_id": "07_tool_failure_permanent",
+  "case_description": "工具失败（不可恢复）：estimate_duration 一直返回 503",
+  "status": "failed",
+  "status_reason": "estimate_duration 服务连续 3 次返回 HTTP 503（SERVICE_UNAVAILABLE，retryable=true），无法验证脚本是否落在 20 秒目标区间；按规则不能跳过时长检查直接交付，因此本轮无法提交最终脚本。素材检索正常：仅检索到 1 条功能事实（P01：识别普通话语音自动生成字幕、生成后可逐句手动修改）和 1 条品牌口号（B01），已据此完成脚本草稿，未编造任何效果数据。",
+  "title": "新手剪视频，字幕别再一句句敲了",
+  "platform": "抖音",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": null,
+  "script_version": "v1",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": null,
+      "visual": "手机屏幕前，博主对着剪辑时间轴发愁，字幕轨道空白",
+      "narration": "剪视频，字幕还在一个字一个字敲？",
+      "subtitle": "字幕还在一个个敲？",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": null,
+      "visual": "打开帧跃剪辑 App，导入一段有人说话的视频，点开字幕功能",
+      "narration": "用帧跃剪辑，导入视频，点字幕。",
+      "subtitle": "帧跃剪辑：导入→点字幕",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": null,
+      "visual": "屏幕出现识别进度，字幕条自动铺满时间轴",
+      "narration": "它能识别视频里的普通话语音，自动生成字幕。",
+      "subtitle": "识别普通话语音，自动生成字幕",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": null,
+      "visual": "手指点开某一句字幕，逐句修改错字，字幕实时更新",
+      "narration": "生成后还能逐句手动改，错字自己修。",
+      "subtitle": "可逐句手动修改",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": null,
+      "visual": "成片播放，字幕整齐出现，品牌 logo 与口号字卡收尾",
+      "narration": "帧跃，让每一帧都好好表达。",
+      "subtitle": "帧跃，让每一帧都好好表达",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "B01"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "B01",
+      "product": "帧跃（品牌通用）",
+      "type": "brand",
+      "fact": "品牌口号：帧跃，让每一帧都好好表达。",
+      "source": "帧跃品牌手册 2026（合成）"
+    },
+    {
+      "id": "P01",
+      "product": "帧跃剪辑 App",
+      "type": "feature",
+      "fact": "帧跃剪辑 App 支持字幕功能：可识别视频中的普通话语音并自动生成字幕，生成后可逐句手动修改。",
+      "source": "帧跃剪辑功能说明 v3.2（合成）"
+    }
+  ],
+  "checks": {
+    "duration": null,
+    "rules": null
+  },
+  "risks": [],
+  "system_notes": [
+    "工具调用失败 3 次：['estimate_duration: SERVICE_UNAVAILABLE', 'estimate_duration: SERVICE_UNAVAILABLE', 'estimate_duration: SERVICE_UNAVAILABLE']",
+    "附带的脚本 v1 未通过全部检查，不可直接发布"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": null,
+      "duration": "未估算",
+      "rules": "未检查"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃剪辑 App 自动字幕 功能",
+        "product": "帧跃剪辑 App",
+        "count": 1
+      },
+      {
+        "query": "帧跃剪辑 品牌 支持平台 导出 字幕样式",
+        "product": "帧跃剪辑 App",
+        "count": 2
+      }
+    ],
+    "retrieved_ids": [
+      "B01",
+      "P01"
+    ]
+  },
+  "brief_initial": {
+    "topic": "帧跃剪辑自动字幕",
+    "product": "帧跃剪辑 App",
+    "audience": "新手博主",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "帧跃剪辑自动字幕",
+    "product": "帧跃剪辑 App",
+    "audience": "新手博主",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": null,
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 6,
+    "tool_calls_used": 6,
+    "tool_call_counts": {
+      "search_materials": 2,
+      "estimate_duration": 3,
+      "report_failure": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  },
+  "failure": {
+    "reason": "estimate_duration 服务连续 3 次返回 HTTP 503（SERVICE_UNAVAILABLE，retryable=true），无法验证脚本是否落在 20 秒目标区间；按规则不能跳过时长检查直接交付，因此本轮无法提交最终脚本。素材检索正常：仅检索到 1 条功能事实（P01：识别普通话语音自动生成字幕、生成后可逐句手动修改）和 1 条品牌口号（B01），已据此完成脚本草稿，未编造任何效果数据。",
+    "failed_checks": [
+      "estimate_duration 服务不可用（HTTP 503），时长未验证",
+      "check_rules 未执行（需先通过时长估算）"
+    ],
+    "suggestions": [
+      "稍后重试：时长估算服务疑似临时故障，恢复后我可立即重新估算并做规则检查、提交",
+      "若急需交付，可先人工按 4.2 字/秒核对草稿旁白字数（当前约 60 字，预计接近 18-20 秒）",
+      "如需更饱满的内容，可补充帧跃剪辑 App 的字幕样式、导出规格或效果数据素材，我再扩写分镜"
+    ]
+  }
+}

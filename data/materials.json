@@ -1,0 +1,93 @@
+{
+  "_note": "全部为合成数据：品牌“帧跃”与其产品均为虚构，仅用于笔试演示，不对应任何真实公司或产品。",
+  "brand": {
+    "name": "帧跃",
+    "forbidden_variants": ["帧越", "侦跃", "祯跃", "帧悦"]
+  },
+  "products": [
+    {
+      "product_id": "editor",
+      "name": "帧跃剪辑 App",
+      "aliases": ["帧跃剪辑", "帧跃剪辑app", "帧跃 剪辑"]
+    },
+    {
+      "product_id": "m2",
+      "name": "帧跃 M2 无线麦克风",
+      "aliases": ["帧跃M2", "帧跃 M2", "帧跃m2无线麦克风", "M2 无线麦克风", "帧跃麦克风"]
+    }
+  ],
+  "materials": [
+    {
+      "id": "P01",
+      "product_id": "editor",
+      "type": "feature",
+      "fact": "帧跃剪辑 App 支持字幕功能：可识别视频中的普通话语音并自动生成字幕，生成后可逐句手动修改。",
+      "keywords": ["字幕", "自动字幕", "语音识别", "加字幕"],
+      "source": "帧跃剪辑功能说明 v3.2（合成）"
+    },
+    {
+      "id": "M01",
+      "product_id": "m2",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "keywords": ["降噪", "AI降噪", "底噪", "噪音", "收音"],
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M02",
+      "product_id": "m2",
+      "type": "spec",
+      "fact": "帧跃 M2 发射器续航约 8 小时（单次充满连续录音，实验室条件，关闭降噪）。",
+      "keywords": ["续航", "电池", "录音时长", "充电"],
+      "required_disclaimer": "续航为实验室数据，实际以使用环境为准",
+      "disclaimer_keywords": ["实验室"],
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M03",
+      "product_id": "m2",
+      "type": "spec",
+      "fact": "帧跃 M2 在空旷无遮挡环境下有效传输距离约 50 米。",
+      "keywords": ["传输距离", "距离", "无线传输", "远距离"],
+      "required_disclaimer": "传输距离为空旷环境测试值",
+      "disclaimer_keywords": ["空旷环境"],
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M04",
+      "product_id": "m2",
+      "type": "effect_data",
+      "fact": "内部测试（20 名测试者，约 65dB 咖啡馆环境）：开启 AI 降噪后，人声清晰度主观评分由 3.1 分提升至 4.3 分（5 分制）。",
+      "keywords": ["降噪效果", "清晰度", "测试", "嘈杂", "咖啡馆", "效果"],
+      "required_disclaimer": "数据来自内部小样本测试，仅供参考",
+      "disclaimer_keywords": ["内部测试", "内部小样本"],
+      "source": "M2 内部听感测试报告 2026-09（合成）"
+    },
+    {
+      "id": "M05",
+      "product_id": "m2",
+      "type": "spec",
+      "fact": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本，插上手机即可使用，无需安装 App。",
+      "keywords": ["接口", "Type-C", "Lightning", "手机", "即插即用", "兼容"],
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M06",
+      "product_id": "m2",
+      "type": "price",
+      "fact": "帧跃 M2 首发价 399 元（含 1 个发射器和 1 个接收器），活动时间 2026-11-11 至 2026-11-20。",
+      "keywords": ["价格", "首发价", "优惠", "活动", "多少钱"],
+      "required_disclaimer": "价格以官方页面为准",
+      "disclaimer_keywords": ["以官方"],
+      "source": "M2 上市活动 brief（合成）"
+    },
+    {
+      "id": "B01",
+      "product_id": "brand",
+      "type": "brand",
+      "fact": "品牌口号：帧跃，让每一帧都好好表达。",
+      "keywords": ["口号", "slogan", "品牌口号", "品牌"],
+      "source": "帧跃品牌手册 2026（合成）"
+    }
+  ]
+}

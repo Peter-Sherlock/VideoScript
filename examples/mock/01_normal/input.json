@@ -1,0 +1,19 @@
+{
+  "case_id": "01_normal",
+  "description": "正常生成：帧跃 M2 无线麦克风，抖音 30 秒种草脚本",
+  "covers": [
+    "正常生成"
+  ],
+  "brief": {
+    "topic": "vlog 新手收音避坑：帧跃 M2 无线麦克风",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "刚开始拍 vlog 的新手创作者",
+    "platform": "抖音",
+    "target_duration_sec": 30,
+    "style": "轻松种草、口语化",
+    "must_include": [
+      "降噪"
+    ]
+  },
+  "run_options": {}
+}

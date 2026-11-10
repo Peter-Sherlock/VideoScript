@@ -1,0 +1,257 @@
+{
+  "case_id": "01_normal",
+  "case_description": "正常生成：帧跃 M2 无线麦克风，抖音 30 秒种草脚本",
+  "status": "completed",
+  "status_reason": "脚本 v7 已通过时长与规则检查",
+  "title": "vlog新手收音避坑：帧跃M2无线麦克风",
+  "platform": "抖音",
+  "target_duration_sec": 30.0,
+  "estimated_total_sec": 30.0,
+  "script_version": "v7",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 3.3,
+      "visual": "手持手机对镜头，背景空调开着，画面微晃",
+      "narration": "拍vlog容易被吐槽的，是声音。",
+      "subtitle": "vlog翻车：声音没录好",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 3.0,
+      "visual": "回放素材，空调嗡嗡声明显，人物无奈",
+      "narration": "空调声风扇声，全录进去。",
+      "subtitle": "空调风扇声全录进去",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 5.3,
+      "visual": "产品特写，手指按下降噪键，指示灯亮起",
+      "narration": "帧跃M2，一键AI降噪，空调风扇底噪能压下去。",
+      "subtitle": "帧跃M2 一键AI降噪",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 7.1,
+      "visual": "咖啡馆分屏对比，标注开/关降噪",
+      "narration": "内部测试，65分贝咖啡馆，人声清晰度从3.1提到4.3。",
+      "subtitle": "咖啡馆实测 3.1→4.3分",
+      "screen_note": "数据来自内部小样本测试，仅供参考",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M04"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": 3.3,
+      "visual": "接收器插上手机，直接出现录音界面",
+      "narration": "Type-C和Lightning都有，插上就录。",
+      "subtitle": "插上就录 不用装App",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M05"
+      ]
+    },
+    {
+      "shot_id": 6,
+      "duration_sec": 3.9,
+      "visual": "产品摆桌面，旁边出现价格标签",
+      "narration": "首发399，含发射器和接收器。",
+      "subtitle": "首发399元",
+      "screen_note": "价格以官方页面为准",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M06"
+      ]
+    },
+    {
+      "shot_id": 7,
+      "duration_sec": 4.1,
+      "visual": "主播对镜头挥手，出现关注按钮",
+      "narration": "新手先把声音搞定，评论区聊你的坑。",
+      "subtitle": "评论区聊你的收音坑",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "feature",
+      "fact": "帧跃 M2 支持一键开启 AI 降噪，可抑制空调、风扇等环境底噪。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M04",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "effect_data",
+      "fact": "内部测试（20 名测试者，约 65dB 咖啡馆环境）：开启 AI 降噪后，人声清晰度主观评分由 3.1 分提升至 4.3 分（5 分制）。",
+      "source": "M2 内部听感测试报告 2026-09（合成）",
+      "required_disclaimer": "数据来自内部小样本测试，仅供参考"
+    },
+    {
+      "id": "M05",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 接收器提供 Type-C 与 Lightning 两种接口版本，插上手机即可使用，无需安装 App。",
+      "source": "M2 产品规格书 v1.0（合成）"
+    },
+    {
+      "id": "M06",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "price",
+      "fact": "帧跃 M2 首发价 399 元（含 1 个发射器和 1 个接收器），活动时间 2026-11-11 至 2026-11-20。",
+      "source": "M2 上市活动 brief（合成）",
+      "required_disclaimer": "价格以官方页面为准"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 30.0,
+      "allowed_range_sec": [
+        24.0,
+        30.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 4.5,
+      "script_version": "v7"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v7"
+    }
+  },
+  "risks": [
+    "时长卡在30.0秒上限，现场语速偏慢或加停顿会超时，建议录制时按稿速念",
+    "镜头4的3.1→4.3分为内部小样本主观评分，已在角标注明，不可剪掉免责小字",
+    "价格399元为2026-11-11至11-20首发活动价，活动结束后需替换或删除该镜头",
+    "续航（M02）与50米传输（M03）因时长限制未入片，如需强调需延长时长",
+    "受众按“vlog新手”假设，风格按轻松种草口语化处理"
+  ],
+  "system_notes": [],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 44.4,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 33.4,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 30.6,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v4",
+      "estimated_sec": 30.4,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v5",
+      "estimated_sec": 30.2,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v6",
+      "estimated_sec": 30.0,
+      "duration": "ok",
+      "rules": [
+        "BANNED_WORD",
+        "UNSUPPORTED_NUMBER"
+      ]
+    },
+    {
+      "version": "v7",
+      "estimated_sec": 30.0,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 降噪 功能",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": "vlog 新手收音避坑：帧跃 M2 无线麦克风",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "刚开始拍 vlog 的新手创作者",
+    "platform": "抖音",
+    "target_duration_sec": 30.0,
+    "style": "轻松种草、口语化",
+    "must_include": [
+      "降噪"
+    ],
+    "extra_requirements": null,
+    "request": null
+  },
+  "brief_final": {
+    "topic": "vlog 新手收音避坑：帧跃 M2 无线麦克风",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "刚开始拍 vlog 的新手创作者",
+    "platform": "抖音",
+    "target_duration_sec": 30.0,
+    "style": "轻松种草、口语化",
+    "must_include": [
+      "降噪"
+    ],
+    "extra_requirements": null,
+    "request": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 12,
+    "tool_calls_used": 12,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "estimate_duration": 8,
+      "check_rules": 2,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  }
+}

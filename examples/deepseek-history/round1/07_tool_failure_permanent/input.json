@@ -1,0 +1,21 @@
+{
+  "case_id": "07_tool_failure_permanent",
+  "description": "工具失败（不可恢复）：estimate_duration 一直返回 503",
+  "covers": [
+    "工具失败",
+    "明确失败"
+  ],
+  "brief": {
+    "topic": "帧跃剪辑自动字幕",
+    "product": "帧跃剪辑 App",
+    "audience": "新手博主",
+    "platform": "抖音",
+    "target_duration_sec": 20,
+    "style": "干货讲解"
+  },
+  "run_options": {
+    "faults": [
+      "estimate_duration:permanent"
+    ]
+  }
+}

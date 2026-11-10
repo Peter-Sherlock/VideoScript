@@ -1,0 +1,73 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.2.0, pluggy-1.7.0 -- C:\Python314\python.exe
+rootdir: F:\Agentic_systems\VideoScript
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.15.1, langsmith-0.12.2
+collecting ... collected 63 items
+
+tests/test_agent_loop.py::test_happy_path_completed PASSED
+tests/test_agent_loop.py::test_submit_without_checks_is_rejected PASSED
+tests/test_agent_loop.py::test_submit_different_version_than_checked_is_rejected PASSED
+tests/test_agent_loop.py::test_citing_unretrieved_material_fails_rules PASSED
+tests/test_agent_loop.py::test_step_limit_returns_incomplete PASSED
+tests/test_agent_loop.py::test_tool_call_limit_returns_incomplete PASSED
+tests/test_agent_loop.py::test_per_tool_limit_is_reported_to_model PASSED
+tests/test_agent_loop.py::test_transient_fault_is_observation_not_auto_retry PASSED
+tests/test_agent_loop.py::test_permanent_fault_then_model_reports_failure PASSED
+tests/test_agent_loop.py::test_missing_info_needs_input PASSED
+tests/test_agent_loop.py::test_estimate_without_target_returns_error PASSED
+tests/test_agent_loop.py::test_update_brief_requires_user_reply_and_cannot_override PASSED
+tests/test_agent_loop.py::test_text_only_turn_gets_nudged PASSED
+tests/test_agent_loop.py::test_invalid_arguments_and_unknown_tool PASSED
+tests/test_agent_loop.py::test_trace_records_next_action PASSED
+tests/test_agent_loop.py::test_resubmitting_same_version_is_flagged PASSED
+tests/test_agent_loop.py::test_duplicate_check_does_not_break_gate PASSED
+tests/test_agent_loop.py::test_update_brief_rejects_values_not_in_user_reply PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[01_normal] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[02_reference_p01] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[02b_reference_user_draft] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[03_missing_info] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[03b_missing_info_answered] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[04_no_material] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[05_query_rewrite] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[06_tool_failure_transient] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[07_tool_failure_permanent] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[08_overtime_infeasible] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[09_rule_violation] PASSED
+tests/test_scenarios.py::test_status_and_independent_verification[10_step_limit] PASSED
+tests/test_scenarios.py::test_reference_case_compresses_and_never_fabricates PASSED
+tests/test_scenarios.py::test_reference_user_draft_38s_is_compressed_and_cleaned PASSED
+tests/test_scenarios.py::test_no_material_asks_after_rewrite PASSED
+tests/test_scenarios.py::test_rewrite_path_differs_from_no_material_path PASSED
+tests/test_scenarios.py::test_missing_info_then_answer_continues PASSED
+tests/test_scenarios.py::test_infeasible_duration_reports_conflict PASSED
+tests/test_scenarios.py::test_rule_violation_fixed_and_logged PASSED
+tests/test_scenarios.py::test_live_deepseek_reference_case SKIPPED (...)
+tests/test_tools.py::test_search_by_product_returns_only_that_product PASSED
+tests/test_tools.py::test_search_unknown_product_is_empty_with_hint PASSED
+tests/test_tools.py::test_search_typo_product_fails_then_rewrite_succeeds PASSED
+tests/test_tools.py::test_search_by_keyword_without_product PASSED
+tests/test_tools.py::test_brand_name_alone_is_not_relevant PASSED
+tests/test_tools.py::test_duration_sums_per_shot_and_flags_over PASSED
+tests/test_tools.py::test_duration_under_and_ok PASSED
+tests/test_tools.py::test_hold_sec_and_style_speed PASSED
+tests/test_tools.py::test_numbers_count_as_spoken_syllables PASSED
+tests/test_tools.py::test_reference_case_efficiency_80_is_rejected PASSED
+tests/test_tools.py::test_chinese_numeral_effect_claim_rejected PASSED
+tests/test_tools.py::test_intensified_claim_rejected_and_plain_claim_warns PASSED
+tests/test_tools.py::test_supported_script_passes PASSED
+tests/test_tools.py::test_feature_not_in_source_is_rejected PASSED
+tests/test_tools.py::test_feature_without_source_and_unretrieved_source PASSED
+tests/test_tools.py::test_disclaimer_banned_words_brand_title PASSED
+tests/test_tools.py::test_effect_data_supports_numbers PASSED
+tests/test_tools.py::test_must_include_points PASSED
+tests/test_tools.py::test_first_step_is_not_banned PASSED
+tests/test_tools.py::test_extract_numbers PASSED
+tests/test_tools.py::test_long_subtitle_needs_reading_time PASSED
+tests/test_tools.py::test_must_include_only_in_screen_note_is_not_enough PASSED
+tests/test_tools.py::test_narration_budget_hint PASSED
+tests/test_tools.py::test_over_duration_gives_per_shot_cut_plan PASSED
+tests/test_tools.py::test_must_include_only_in_title_is_not_enough PASSED
+
+======================== 62 passed, 1 skipped in 0.20s ========================

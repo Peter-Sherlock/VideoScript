@@ -1,0 +1,208 @@
+{
+  "case_id": "02_reference_p01",
+  "case_description": "题目参考实例：帧跃剪辑 App 只有 P01（支持字幕）一条事实，要求 30 秒；用户想要“效率提升80%”这类数据，但素材里没有效果数据",
+  "status": "completed",
+  "status_reason": "脚本 v3 已通过时长与规则检查",
+  "title": "新手加字幕，别再一句句敲了",
+  "platform": "视频号",
+  "target_duration_sec": 30.0,
+  "estimated_total_sec": 28.7,
+  "script_version": "v3",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 4.6,
+      "visual": "手机竖屏：博主对着镜头，手里举着手机，屏幕上是没字幕的口播视频",
+      "narration": "口播视频没字幕，你是不是一句句手打？",
+      "subtitle": "口播没字幕，还在手打？",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 4.1,
+      "visual": "特写：手指在时间轴上反复拖动、敲字，进度条几乎不动",
+      "narration": "一条视频，光敲字就能耗掉一晚上。",
+      "subtitle": "一条视频，敲字耗一晚",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 4.6,
+      "visual": "打开帧跃剪辑 App，导入视频，点“自动字幕”，进度条跑起来",
+      "narration": "试试帧跃剪辑。导入视频，点自动字幕。",
+      "subtitle": "帧跃剪辑：导入→自动字幕",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 5.3,
+      "visual": "屏幕演示：字幕随语音自动出现在时间轴上",
+      "narration": "它能识别视频里的普通话语音，自动生成字幕。",
+      "subtitle": "识别普通话语音，自动生成字幕",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 5,
+      "duration_sec": 4.1,
+      "visual": "特写：手指点某一句字幕，改成正确文字，其他句不动",
+      "narration": "识别不准的地方，逐句手动改就行。",
+      "subtitle": "不准的句子，逐句手动改",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 6,
+      "duration_sec": 6.0,
+      "visual": "博主回到镜头前，字幕成品在身后播放，品牌 logo 出现",
+      "narration": "帧跃剪辑，自动字幕加逐句修改。字幕这步，交给它。",
+      "subtitle": "帧跃剪辑：自动字幕+逐句改",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "P01",
+      "product": "帧跃剪辑 App",
+      "type": "feature",
+      "fact": "帧跃剪辑 App 支持字幕功能：可识别视频中的普通话语音并自动生成字幕，生成后可逐句手动修改。",
+      "source": "帧跃剪辑功能说明 v3.2（合成）"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 28.7,
+      "allowed_range_sec": [
+        24.0,
+        30.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 4.2,
+      "script_version": "v3"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v3"
+    }
+  },
+  "risks": [
+    "用户要求的“效率提升80%”无素材依据：素材库仅有功能说明（P01），无任何 effect_data，因此脚本未写任何效率数字或效果结论，改用“省在哪一步”的功能事实来体现效率",
+    "素材库关于帧跃剪辑 App 只有一条功能事实（P01：识别普通话语音自动生成字幕、可逐句手动修改）与一条品牌口号（B01），可讲内容有限，未涉及识别准确率、支持语言、导出格式等",
+    "shot 1、shot 2 的“手打字幕耗一晚”属痛点氛围描述，非产品事实，未标注来源；如需更严谨可改为纯画面无旁白",
+    "受众按简报设定为“需要给口播视频加字幕的新手博主”，风格为干货讲解，平台为视频号（竖屏）",
+    "若确实需要数据支撑的效率结论，建议补充帧跃官方测试数据或用户调研素材后再加一版"
+  ],
+  "system_notes": [],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 28.7,
+      "duration": "ok",
+      "rules": [
+        "MISSING_SOURCE",
+        "UNSUPPORTED_FEATURE"
+      ]
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 28.9,
+      "duration": "ok",
+      "rules": [
+        "MISSING_SOURCE"
+      ]
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 28.7,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃剪辑 自动字幕 功能",
+        "product": "帧跃剪辑 App",
+        "count": 1
+      },
+      {
+        "query": "帧跃剪辑 效率 数据 效果",
+        "product": "帧跃剪辑 App",
+        "count": 0
+      },
+      {
+        "query": "帧跃剪辑 App 字幕 识别 修改 品牌",
+        "product": "帧跃剪辑 App",
+        "count": 2
+      }
+    ],
+    "retrieved_ids": [
+      "B01",
+      "P01"
+    ]
+  },
+  "brief_initial": {
+    "topic": "帧跃剪辑的自动字幕功能，帮剪辑新手提高效率",
+    "product": "帧跃剪辑 App",
+    "audience": "需要给口播视频加字幕的新手博主",
+    "platform": "视频号",
+    "target_duration_sec": 30.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": "想突出效率提升，最好带个数据，比如效率提升80%",
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "帧跃剪辑的自动字幕功能，帮剪辑新手提高效率",
+    "product": "帧跃剪辑 App",
+    "audience": "需要给口播视频加字幕的新手博主",
+    "platform": "视频号",
+    "target_duration_sec": 30.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": "想突出效率提升，最好带个数据，比如效率提升80%",
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 9,
+    "tool_calls_used": 10,
+    "tool_call_counts": {
+      "search_materials": 3,
+      "estimate_duration": 3,
+      "check_rules": 3,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  }
+}

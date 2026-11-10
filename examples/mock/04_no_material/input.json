@@ -1,0 +1,16 @@
+{
+  "case_id": "04_no_material",
+  "description": "无素材：素材库里没有“帧跃 X1 智能云台”",
+  "covers": [
+    "无素材"
+  ],
+  "brief": {
+    "topic": "帧跃 X1 智能云台开箱",
+    "product": "帧跃 X1 智能云台",
+    "audience": "数码爱好者",
+    "platform": "小红书",
+    "target_duration_sec": 20,
+    "style": "开箱测评"
+  },
+  "run_options": {}
+}

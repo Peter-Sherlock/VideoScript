@@ -1,0 +1,158 @@
+{
+  "case_id": "02_reference_p01",
+  "case_description": "题目参考实例：帧跃剪辑 App 只有 P01（支持字幕）一条事实，要求 30 秒；用户想要“效率提升80%”这类数据，但素材里没有效果数据",
+  "status": "completed",
+  "status_reason": "脚本 v2 已通过时长与规则检查",
+  "title": "帧跃剪辑的自动字幕功能",
+  "platform": "视频号",
+  "target_duration_sec": 30.0,
+  "estimated_total_sec": 25.1,
+  "script_version": "v2",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 4.8,
+      "visual": "近景：创作者对着镜头皱眉，画面略显杂乱",
+      "narration": "拍视频的你，是不是也常被这些细节卡住？",
+      "subtitle": "拍视频的你",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 10.5,
+      "visual": "产品特写 + 讲解（对应 P01）",
+      "narration": "帧跃剪辑 App 支持字幕功能：可识别视频中的普通话语音并自动生成字幕，生成后可逐句手动修改。",
+      "subtitle": "帧跃剪辑 App 支持字幕功能",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 4.0,
+      "visual": "屏幕录制/实拍演示该功能（对应 P01）",
+      "narration": "",
+      "subtitle": "实际操作演示",
+      "screen_note": "",
+      "hold_sec": 4.0,
+      "source_ids": [
+        "P01"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 5.8,
+      "visual": "产品 logo 定格 + 关注引导",
+      "narration": "帧跃剪辑 App，去试试吧，评论区聊聊你的拍摄需求。",
+      "subtitle": "评论区聊聊你的需求",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "P01",
+      "product": "帧跃剪辑 App",
+      "type": "feature",
+      "fact": "帧跃剪辑 App 支持字幕功能：可识别视频中的普通话语音并自动生成字幕，生成后可逐句手动修改。",
+      "source": "帧跃剪辑功能说明 v3.2（合成）"
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 25.1,
+      "allowed_range_sec": [
+        24.0,
+        30.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 4.2,
+      "script_version": "v2"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v2"
+    }
+  },
+  "risks": [
+    "素材中没有效果数据，脚本只陈述功能，不含效果量化结论"
+  ],
+  "system_notes": [
+    "离线 Mock 策略运行：只验证流程与工具链，不代表真实模型的决策效果"
+  ],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": 36.7,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 25.1,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃剪辑 App 帧跃剪辑的自动字幕功能，帮剪辑新手提高效率",
+        "product": "帧跃剪辑 App",
+        "count": 1
+      }
+    ],
+    "retrieved_ids": [
+      "P01"
+    ]
+  },
+  "brief_initial": {
+    "topic": "帧跃剪辑的自动字幕功能，帮剪辑新手提高效率",
+    "product": "帧跃剪辑 App",
+    "audience": "需要给口播视频加字幕的新手博主",
+    "platform": "视频号",
+    "target_duration_sec": 30.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": "想突出效率提升，最好带个数据，比如效率提升80%",
+    "request": null,
+    "draft_script": null
+  },
+  "brief_final": {
+    "topic": "帧跃剪辑的自动字幕功能，帮剪辑新手提高效率",
+    "product": "帧跃剪辑 App",
+    "audience": "需要给口播视频加字幕的新手博主",
+    "platform": "视频号",
+    "target_duration_sec": 30.0,
+    "style": "干货讲解",
+    "must_include": [],
+    "extra_requirements": "想突出效率提升，最好带个数据，比如效率提升80%",
+    "request": null,
+    "draft_script": null
+  },
+  "run": {
+    "llm": "mock/rule-policy",
+    "steps_used": 5,
+    "tool_calls_used": 5,
+    "tool_call_counts": {
+      "search_materials": 1,
+      "estimate_duration": 2,
+      "check_rules": 1,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "08_overtime_infeasible",
+  "description": "超时长且无法修正：10 秒内必须讲完降噪、续航、传输距离和价格",
+  "covers": [
+    "超时长后明确失败"
+  ],
+  "brief": {
+    "topic": "帧跃 M2 全卖点速览",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "数码爱好者",
+    "platform": "抖音",
+    "target_duration_sec": 10,
+    "style": "快节奏",
+    "must_include": [
+      "降噪",
+      "续航",
+      "传输距离",
+      "399"
+    ]
+  },
+  "run_options": {}
+}

@@ -1,0 +1,63 @@
+{
+  "case_id": "02b_reference_user_draft",
+  "description": "题目参考实例（压缩路径）：素材只有 P01，创作者自带一版约 38 秒、含“效率提升80%”的草稿，要求改到 30 秒内",
+  "covers": [
+    "超时长后修正",
+    "不得编造效果数据",
+    "规则检查不通过→修改再检查"
+  ],
+  "brief": {
+    "topic": "帧跃剪辑自动字幕功能",
+    "product": "帧跃剪辑 App",
+    "audience": "需要给口播视频加字幕的新手博主",
+    "platform": "视频号",
+    "target_duration_sec": 30,
+    "style": "干货讲解",
+    "extra_requirements": "这是我自己写的草稿，帮我改到 30 秒以内，能保留的尽量保留",
+    "draft_script": {
+      "title": "帧跃剪辑自动字幕，效率提升80%",
+      "shots": [
+        {
+          "shot_id": 1,
+          "visual": "博主对着镜头，身后是堆满素材的电脑屏幕",
+          "narration": "做口播视频的朋友，是不是每次加字幕都要花很久，一个字一个字地敲，眼睛都看花了？",
+          "subtitle": "加字幕还在一个字一个字敲？",
+          "source_ids": []
+        },
+        {
+          "shot_id": 2,
+          "visual": "手机录屏：打开帧跃剪辑 App，导入口播视频",
+          "narration": "今天给大家推荐帧跃剪辑 App，它支持字幕功能，可以识别视频里的普通话语音，自动帮你生成字幕。",
+          "subtitle": "识别普通话，自动生成字幕",
+          "source_ids": [
+            "P01"
+          ]
+        },
+        {
+          "shot_id": 3,
+          "visual": "录屏：点开某一句字幕修改错字",
+          "narration": "生成以后如果有识别错的地方，还可以一句一句手动修改，非常方便。",
+          "subtitle": "识别错了可以逐句改",
+          "source_ids": [
+            "P01"
+          ]
+        },
+        {
+          "shot_id": 4,
+          "visual": "前后对比：熬夜打字幕 vs 轻松喝咖啡",
+          "narration": "用了它以后，我做字幕的效率提升了80%，再也不用熬夜加字幕了。",
+          "subtitle": "效率提升80%",
+          "source_ids": []
+        },
+        {
+          "shot_id": 5,
+          "visual": "博主挥手，屏幕出现关注按钮",
+          "narration": "赶紧去试试吧，记得点赞关注！",
+          "subtitle": "点赞关注",
+          "source_ids": []
+        }
+      ]
+    }
+  },
+  "run_options": {}
+}
