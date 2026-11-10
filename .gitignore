@@ -7,3 +7,5 @@ venv/
 *.egg-info/
 .idea/
 .vscode/
+# README 演示命令的输出目录
+examples/runs/

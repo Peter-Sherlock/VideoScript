@@ -25,11 +25,17 @@
 
 ## 环境与安装
 
-- Python ≥ 3.10（开发与验证使用 Python 3.14，Windows 10）
+- Python ≥ 3.10（在 Windows 10 上实测 Python 3.11 与 3.14：全新虚拟环境只装 `requirements.txt` 即可通过全部测试；3.10 未实测）
 - 依赖：`openai`、`python-dotenv`、`pytest`
 
 ```bash
 python -m pip install -r requirements.txt
+```
+
+国内网络访问 PyPI 较慢时，可改用镜像：
+
+```bash
+python -m pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 配置（仅真实模型需要；Mock 模式无需任何配置）：
@@ -152,7 +158,7 @@ src/vsagent/
   verify.py                 独立核对
   render.py / trace.py      Markdown 输出与运行记录
 data/                       合成素材与品牌/平台规则
-tests/                      工具单测、循环护栏测试、端到端场景测试
+tests/                      工具单测、循环护栏测试、命令行测试、端到端场景测试
 examples/inputs/            12 个输入用例
 examples/deepseek/          真实模型运行结果（最终版）
 examples/deepseek-history/  改进前各轮的真实运行结果
@@ -163,5 +169,5 @@ docs/                       01–05 文档
 
 ## 用时与未完成部分
 
-- 实际用时：____（请候选人如实填写，见 [docs/04-ai-usage.md](docs/04-ai-usage.md)）
+- 实际用时：2026-11-10 19:20–23:30，约 4 小时（与 AI 编程助手协作完成，含真实模型批量运行的等待时间；分工见 [docs/04-ai-usage.md](docs/04-ai-usage.md)）
 - 未完成 / 未做：界面、HTTP API、会话断点续跑、基于模型的语义级事实核对、TTS 实测时长校准、多次重复运行的统计评估（详见 [docs/05-retrospective.md](docs/05-retrospective.md)）。

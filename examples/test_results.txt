@@ -4,7 +4,7 @@ rootdir: F:\Agentic_systems\VideoScript
 configfile: pytest.ini
 testpaths: tests
 plugins: anyio-4.15.1, langsmith-0.12.2
-collecting ... collected 63 items
+collecting ... collected 71 items
 
 tests/test_agent_loop.py::test_happy_path_completed PASSED
 tests/test_agent_loop.py::test_submit_without_checks_is_rejected PASSED
@@ -24,6 +24,14 @@ tests/test_agent_loop.py::test_trace_records_next_action PASSED
 tests/test_agent_loop.py::test_resubmitting_same_version_is_flagged PASSED
 tests/test_agent_loop.py::test_duplicate_check_does_not_break_gate PASSED
 tests/test_agent_loop.py::test_update_brief_rejects_values_not_in_user_reply PASSED
+tests/test_cli.py::test_run_with_out_dir_writes_all_files PASSED
+tests/test_cli.py::test_answer_flag_continues_after_missing_info PASSED
+tests/test_cli.py::test_fault_flag_is_injected PASSED
+tests/test_cli.py::test_missing_input_file_is_reported PASSED
+tests/test_cli.py::test_bad_fault_spec_is_reported PASSED
+tests/test_cli.py::test_missing_api_key_suggests_mock PASSED
+tests/test_cli.py::test_interactive_eof_means_no_answer PASSED
+tests/test_cli.py::test_interactive_answer_is_used PASSED
 tests/test_scenarios.py::test_status_and_independent_verification[01_normal] PASSED
 tests/test_scenarios.py::test_status_and_independent_verification[02_reference_p01] PASSED
 tests/test_scenarios.py::test_status_and_independent_verification[02b_reference_user_draft] PASSED
@@ -70,4 +78,4 @@ tests/test_tools.py::test_narration_budget_hint PASSED
 tests/test_tools.py::test_over_duration_gives_per_shot_cut_plan PASSED
 tests/test_tools.py::test_must_include_only_in_title_is_not_enough PASSED
 
-======================== 62 passed, 1 skipped in 0.20s ========================
+======================== 70 passed, 1 skipped in 1.91s ========================

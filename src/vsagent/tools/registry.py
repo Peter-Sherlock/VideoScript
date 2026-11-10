@@ -173,7 +173,10 @@ class AnswerProvider:
             print("\n[Agent 需要补充信息]")
             for q in questions:
                 print(" -", q)
-            reply = self.ask("你的回答（直接回车表示不补充）：").strip()
+            try:
+                reply = self.ask("你的回答（直接回车表示不补充）：").strip()
+            except EOFError:  # 输入流已结束（如管道输入用完），视为用户不补充
+                return None
             return reply or None
         return None
 

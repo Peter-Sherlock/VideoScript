@@ -71,9 +71,13 @@ def _print_summary(output: dict[str, Any]) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     load_env()
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8")
-    parser = argparse.ArgumentParser(prog="vsagent", description="短视频脚本 Agent")
+    # Windows 下管道/重定向默认按 GBK 编解码：统一用 UTF-8，避免中文乱码（含 --interactive 的管道输入）
+    for stream in (sys.stdout, sys.stderr, sys.stdin):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError, OSError):  # 被测试框架替换过的流等情况，保持原样
+            pass
+    parser =argparse.ArgumentParser(prog="vsagent", description="短视频脚本 Agent")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     p_run = sub.add_parser("run", help="运行单个用例")
@@ -101,19 +105,31 @@ def main(argv: list[str] | None = None) -> int:
     if args.max_tool_calls:
         limits.max_tool_calls = args.max_tool_calls
 
+    try:  # 先校验输入文件和故障参数，给出可读的错误而不是异常堆栈
+        cases = ([load_case(Path(args.input))] if args.cmd == "run"
+                 else [load_case(f) for f in sorted(Path(args.inputs).glob("*.json"))
+                       if not args.only or any(f.stem.startswith(p) for p in args.only)])
+        for c in cases:
+            FaultPlan.parse(args.fault if args.cmd == "run" and args.fault else c["run_options"].get("faults"))
+    except FileNotFoundError as exc:
+        print(f"找不到输入文件：{exc.filename}", file=sys.stderr)
+        return 2
+    except json.JSONDecodeError as exc:
+        print(f"输入文件不是合法 JSON：{exc}", file=sys.stderr)
+        return 2
+    except ValueError as exc:
+        print(f"参数错误：{exc}", file=sys.stderr)
+        return 2
+
     try:
         if args.cmd == "run":
-            case = load_case(Path(args.input))
+            case = cases[0]
             output = run_case(case, args.llm, Path(args.out) if args.out else None, faults=args.fault,
                               answers=args.answer, interactive=args.interactive, limits=limits)
             _print_summary(output)
             if not args.out:
                 print(render_markdown(output))
         else:
-            files = sorted(Path(args.inputs).glob("*.json"))
-            if args.only:
-                files = [f for f in files if any(f.stem.startswith(p) for p in args.only)]
-            cases = [load_case(f) for f in files]
             with ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:  # 用例之间互不共享状态
                 futures = [pool.submit(run_case, c, args.llm, Path(args.out) / c["case_id"], limits=limits)
                            for c in cases]
