@@ -1,0 +1,231 @@
+{
+  "case_id": "battery_life_draft",
+  "case_description": "先核对含错误单位的续航草稿，再修正并提交",
+  "status": "completed",
+  "status_reason": "脚本 v5 已通过时长与规则检查",
+  "title": "帧跃 M2 续航实测",
+  "platform": "抖音",
+  "target_duration_sec": 20.0,
+  "estimated_total_sec": 17.3,
+  "script_version": "v5",
+  "shots": [
+    {
+      "shot_id": 1,
+      "duration_sec": 3.4,
+      "visual": "手持发射器怼镜头，背景是正在录口播的手机支架",
+      "narration": "口播录到一半没电，最崩溃。",
+      "subtitle": "录到一半没电？",
+      "screen_note": "",
+      "hold_sec": 0.0,
+      "source_ids": []
+    },
+    {
+      "shot_id": 2,
+      "duration_sec": 4.0,
+      "visual": "发射器特写，屏幕打出“8 小时”大字",
+      "narration": "帧跃 M2 发射器，续航约 8 小时。",
+      "subtitle": "续航约 8 小时",
+      "screen_note": "发射器单次充满后，在实验室关闭降噪连续录音，实际以使用环境为准",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M02"
+      ]
+    },
+    {
+      "shot_id": 3,
+      "duration_sec": 6.2,
+      "visual": "字幕板逐条弹出测试条件",
+      "narration": "这个数有条件：单次充满，连续录音，实验室，关闭降噪。",
+      "subtitle": "单次充满·连续录音·实验室·关降噪",
+      "screen_note": "发射器单次充满后，在实验室关闭降噪连续录音，实际以使用环境为准",
+      "hold_sec": 0.0,
+      "source_ids": [
+        "M02"
+      ]
+    },
+    {
+      "shot_id": 4,
+      "duration_sec": 3.7,
+      "visual": "创作者把麦克风夹在领口，出门拍摄",
+      "narration": "出门拍摄心里有底，帧跃 M2。",
+      "subtitle": "帧跃 M2，续航看条件",
+      "screen_note": "",
+      "hold_sec": 1.0,
+      "source_ids": [
+        "M02"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "M02",
+      "product": "帧跃 M2 无线麦克风",
+      "type": "spec",
+      "fact": "帧跃 M2 发射器续航约 8 小时（单次充满连续录音，实验室条件，关闭降噪）。",
+      "source": "M2 产品规格书 v1.0（合成）",
+      "required_disclaimer": "发射器单次充满后，在实验室关闭降噪连续录音，实际以使用环境为准",
+      "quantified_fact": {
+        "metric": "续航",
+        "values": [
+          8
+        ],
+        "unit": "小时"
+      }
+    }
+  ],
+  "checks": {
+    "duration": {
+      "passed": true,
+      "status": "ok",
+      "total_sec": 17.3,
+      "allowed_range_sec": [
+        16.0,
+        20.0
+      ],
+      "delta_sec": 0.0,
+      "speech_rate_cps": 4.2,
+      "script_version": "v5"
+    },
+    "rules": {
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "script_version": "v5"
+    }
+  },
+  "risks": [
+    "原稿“续航约 8 分钟”与素材 M02（约 8 小时）不符，已按素材改为 8 小时；若用户本意是其他指标，需补充对应素材",
+    "素材库仅有续航、传输距离、接口、降噪、价格等规格，无“续航实测”类效果数据，因此未写任何实测结论或效率提升表述",
+    "受众按简报设定为口播创作者，风格为干货讲解，未额外假设人群细分",
+    "总时长 17.3 秒，落在 16–20 秒允许区间内但略低于建议的 18 秒，如需更贴近 20 秒可增加一个有素材依据的卖点镜头（如 M03 传输距离 50 米，需带免责说明）"
+  ],
+  "system_notes": [],
+  "revision_history": [
+    {
+      "version": "v1",
+      "estimated_sec": null,
+      "duration": "未估算",
+      "rules": [
+        "UNSUPPORTED_QUANTIFIED_CLAIM"
+      ]
+    },
+    {
+      "version": "v2",
+      "estimated_sec": 20.1,
+      "duration": "over",
+      "rules": "未检查"
+    },
+    {
+      "version": "v3",
+      "estimated_sec": 15.7,
+      "duration": "under",
+      "rules": "未检查"
+    },
+    {
+      "version": "v4",
+      "estimated_sec": 17.3,
+      "duration": "ok",
+      "rules": [
+        "UNSUPPORTED_QUANTIFIED_CLAIM"
+      ]
+    },
+    {
+      "version": "v5",
+      "estimated_sec": 17.3,
+      "duration": "ok",
+      "rules": "通过"
+    }
+  ],
+  "retrieval": {
+    "queries": [
+      {
+        "query": "帧跃 M2 无线麦克风 续航",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 6
+      },
+      {
+        "query": "帧跃 M2 续航 测试条件 电池",
+        "product": "帧跃 M2 无线麦克风",
+        "count": 5
+      }
+    ],
+    "retrieved_ids": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ]
+  },
+  "brief_initial": {
+    "topic": "帧跃 M2 续航",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "口播创作者",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [
+      "续航"
+    ],
+    "extra_requirements": null,
+    "request": "先检索素材，直接用 check_rules 检查下面原稿的事实，再根据工具返回修正，保留续航卖点及测试条件，完成可编辑脚本。",
+    "draft_script": {
+      "title": "帧跃 M2 续航实测",
+      "shots": [
+        {
+          "visual": "麦克风发射器特写",
+          "narration": "帧跃 M2 发射器续航约 8 分钟。",
+          "subtitle": "续航约 8 分钟",
+          "screen_note": "单次充满后在实验室关闭降噪连续录音",
+          "source_ids": [
+            "M02"
+          ]
+        }
+      ]
+    }
+  },
+  "brief_final": {
+    "topic": "帧跃 M2 续航",
+    "product": "帧跃 M2 无线麦克风",
+    "audience": "口播创作者",
+    "platform": "抖音",
+    "target_duration_sec": 20.0,
+    "style": "干货讲解",
+    "must_include": [
+      "续航"
+    ],
+    "extra_requirements": null,
+    "request": "先检索素材，直接用 check_rules 检查下面原稿的事实，再根据工具返回修正，保留续航卖点及测试条件，完成可编辑脚本。",
+    "draft_script": {
+      "title": "帧跃 M2 续航实测",
+      "shots": [
+        {
+          "visual": "麦克风发射器特写",
+          "narration": "帧跃 M2 发射器续航约 8 分钟。",
+          "subtitle": "续航约 8 分钟",
+          "screen_note": "单次充满后在实验室关闭降噪连续录音",
+          "source_ids": [
+            "M02"
+          ]
+        }
+      ]
+    }
+  },
+  "run": {
+    "llm": "deepseek/deepseek-flash",
+    "steps_used": 9,
+    "tool_calls_used": 10,
+    "tool_call_counts": {
+      "search_materials": 2,
+      "check_rules": 3,
+      "estimate_duration": 4,
+      "submit_script": 1
+    },
+    "limits": {
+      "max_steps": 14,
+      "max_tool_calls": 24,
+      "max_calls_per_tool": 8
+    }
+  }
+}

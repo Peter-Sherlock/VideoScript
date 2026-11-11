@@ -85,5 +85,6 @@ def _verify_completed(output, store, rules) -> list[str]:
     re_r = checker.check(script, brief, {i: store.by_id[i] for i in retrieved if i in store.by_id},
                          set(store.by_id), product["product_id"] if product else None)
     if not re_r["passed"]:
-        problems.append(f"独立重跑规则检查未通过：{[v['code'] for v in re_r['violations']]}")
+        failures = "、".join(f"{v['where']} {v['code']}" for v in re_r["violations"])
+        problems.append(f"独立重跑规则检查未通过：{failures}")
     return problems

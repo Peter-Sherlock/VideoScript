@@ -99,6 +99,8 @@ flowchart TD
 | MISSING_SOURCE | 有宣称（含品牌名或“支持/能/一键”等宣称词）的功能/数字表述却没标来源；只是提到话题（如“还在手动打字幕？”）只给提示 |
 | UNSUPPORTED_FEATURE | 功能词表中的词在所引素材里找不到（如只引 P01 却写“多语言翻译”） |
 | UNSUPPORTED_NUMBER | 阿拉伯数字与“八成/两倍/三小时”等中文数量必须出现在所引素材里 |
+| UNSUPPORTED_QUANTIFIED_CLAIM | 对有结构化量化声明的素材，指标、数值和单位必须共同匹配同一条已引用素材。多项评分核对前后次序 |
+| UNSUPPORTED_FACT_CONDITIONS | 量化声明的条件必须在同一分镜出现，并与素材条件一致。标题有量化声明时单独核对 |
 | UNSUPPORTED_EFFECT_CLAIM | “提升/节省/缩短…”+数量，或“大幅/显著”+效果动词，且没有 effect_data 素材支撑 → 拦截“效率提升80%” |
 | EFFECT_CLAIM_NEEDS_REVIEW（提示） | 定性效率表述（“帮你提升效率”），不阻断但进入风险 |
 | BANNED_WORD / WRONG_BRAND_NAME | 广告极限词（“第一步”等不误伤）、品牌错写 |
@@ -106,7 +108,7 @@ flowchart TD
 | TITLE_TOO_LONG / MISSING_TITLE | 按平台标题上限 |
 | MISSING_REQUIRED_POINT | 用户 must_include 的要点必须出现在旁白或字幕中（只写在标题/发布文案或角标小字里不算） |
 
-标题没有单独的来源字段，按“全片已引用素材”核对其中的数字和功能词。
+标题使用全片已引用的素材作为事实来源，标题自身需满足量化声明的条件。结构化核对覆盖素材库中的续航、有效传输距离、人声清晰度评分和首发价。旁白、字幕和角标内出现的数值须与指标和单位配对，适用条件可放在同一分镜的角标。
 
 ## 6. 技术选型与取舍
 

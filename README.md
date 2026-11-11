@@ -82,11 +82,11 @@ python main.py batch --llm deepseek --out examples/deepseek
 
 ```bash
 python -m pytest -q
+python main.py batch --llm mock --out examples/runs/mock
+python scripts/verify_examples.py --runs examples/runs/mock
 ```
 
-```bash
-python scripts/verify_examples.py
-```
+直接运行 `python scripts/verify_examples.py` 会用当前规则复查 Git 中的存档并生成报告。旧稿若缺少新增规则要求的指标、单位或适用条件，报告会标明原因，命令以退出码 1 结束。
 
 可选：真实模型冒烟测试（会调用 API）：在 `.env` 配好 Key 后设置环境变量 `RUN_LIVE=1` 再运行 pytest。
 

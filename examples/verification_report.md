@@ -1,35 +1,36 @@
 # 运行结果独立核对报告
 
-由 `python scripts/verify_examples.py` 生成：不信任 output.json 中的结论，用工具代码重新计算后比对。
+使用当前代码重算时长和重跑规则。表中的状态是存档在运行时的原始状态，核对列显示当前规则的结论。
 
 | 用例 | 状态 | 轮数/工具调用 | 预计/目标(s) | 修订轨迹 | 引用素材 | 核对 |
 |---|---|---|---|---|---|---|
-| deepseek/01_normal | completed | 4/4 | 27.2 / 30.0 | v1:27.2s/ok | M01, M04, M05, M06 | ✅ 一致 |
+| deepseek/01_normal | completed | 4/4 | 27.2 / 30.0 | v1:27.2s/ok | M01, M04, M05, M06 | ❌ 独立重跑规则检查未通过：shot 4 UNSUPPORTED_FACT_CONDITIONS、shot 4 UNSUPPORTED_QUANTIFIED_CLAIM、shot 6 UNSUPPORTED_FACT_CONDITIONS、shot 6 UNSUPPORTED_QUANTIFIED_CLAIM |
 | deepseek/02_reference_p01 | completed | 8/10 | 27.8 / 30.0 | v1:24.6s/ok → v2:29.9s/ok → v3:27.8s/ok | B01, P01 | ✅ 一致 |
 | deepseek/02b_reference_user_draft | completed | 7/8 | 25.9 / 30.0 | v1:38.9s/over → v2:23.2s/under → v3:25.6s/ok → v4:25.9s/ok | P01 | ✅ 一致 |
 | deepseek/02b_reference_user_draft_rerun | completed | 8/9 | 25.4 / 30.0 | v1:38.9s/over → v2:21.5s/under → v3:23.1s/under → v4:23.1s/under → v5:25.4s/ok | P01 | ✅ 一致 |
 | deepseek/03_missing_info | needs_input | 1/2 | - / - | - | - | ✅ 一致 |
-| deepseek/03b_missing_info_answered | completed | 7/8 | 19.5 / 20.0 | v1:23.0s/over → v2:21.0s/over → v3:19.5s/ok | M01, M02, M03, M05, M06 | ✅ 一致 |
+| deepseek/03b_missing_info_answered | completed | 7/8 | 19.5 / 20.0 | v1:23.0s/over → v2:21.0s/over → v3:19.5s/ok | M01, M02, M03, M05, M06 | ❌ 独立重跑规则检查未通过：shot 4 UNSUPPORTED_FACT_CONDITIONS、shot 4 UNSUPPORTED_FACT_CONDITIONS、shot 4 UNSUPPORTED_QUANTIFIED_CLAIM、shot 5 UNSUPPORTED_FACT_CONDITIONS、shot 5 UNSUPPORTED_QUANTIFIED_CLAIM |
 | deepseek/04_no_material | needs_input | 3/4 | - / 20.0 | - | - | ✅ 一致 |
-| deepseek/05_query_rewrite | completed | 6/6 | 19.5 / 20.0 | v1:26.6s/over → v2:19.5s/ok | M01, M04, M05, M06 | ✅ 一致 |
-| deepseek/06_tool_failure_transient | completed | 9/9 | 27.8 / 30.0 | v1:39.0s/over → v2:30.9s/over → v3:28.7s/ok → v4:27.8s/ok | M01, M02, M03, M04, M05, M06 | ✅ 一致 |
+| deepseek/05_query_rewrite | completed | 6/6 | 19.5 / 20.0 | v1:26.6s/over → v2:19.5s/ok | M01, M04, M05, M06 | ❌ 独立重跑规则检查未通过：shot 3 UNSUPPORTED_FACT_CONDITIONS、shot 3 UNSUPPORTED_QUANTIFIED_CLAIM、shot 5 UNSUPPORTED_FACT_CONDITIONS |
+| deepseek/06_tool_failure_transient | completed | 9/9 | 27.8 / 30.0 | v1:39.0s/over → v2:30.9s/over → v3:28.7s/ok → v4:27.8s/ok | M01, M02, M03, M04, M05, M06 | ❌ 独立重跑规则检查未通过：shot 3 UNSUPPORTED_FACT_CONDITIONS、shot 3 UNSUPPORTED_QUANTIFIED_CLAIM、shot 5 UNSUPPORTED_FACT_CONDITIONS、shot 5 UNSUPPORTED_FACT_CONDITIONS、shot 6 UNSUPPORTED_FACT_CONDITIONS |
 | deepseek/07_tool_failure_permanent | failed | 6/6 | - / 20.0 | v1:未估算 | B01, P01 | ✅ 一致 |
 | deepseek/08_overtime_infeasible | failed | 8/8 | 3.5 / 3.0 | v1:7.8s/over → v2:5.4s/over → v3:2.8s/ok → v4:3.5s/over → v5:3.5s/over | M01, M02, M03, M05, M06 | ✅ 一致 |
-| deepseek/09_rule_violation | completed | 8/8 | 23.3 / 25.0 | v1:31.3s/over → v2:25.1s/over → v3:22.8s/ok → v4:23.3s/ok | M01, M02, M03, M04, M05, M06 | ✅ 一致 |
+| deepseek/09_rule_violation | completed | 8/8 | 23.3 / 25.0 | v1:31.3s/over → v2:25.1s/over → v3:22.8s/ok → v4:23.3s/ok | M01, M02, M03, M04, M05, M06 | ❌ 独立重跑规则检查未通过：shot 4 UNSUPPORTED_QUANTIFIED_CLAIM、shot 5 UNSUPPORTED_FACT_CONDITIONS、shot 5 UNSUPPORTED_FACT_CONDITIONS、shot 6 UNSUPPORTED_FACT_CONDITIONS、shot 6 UNSUPPORTED_QUANTIFIED_CLAIM |
 | deepseek/10_step_limit | incomplete | 3/4 | 32.5 / 30.0 | v1:41.4s/over → v2:32.5s/over | M01, M02, M03, M04, M05, M06 | ✅ 一致 |
-| mock/01_normal | completed | 7/7 | 25.1 / 30.0 | v1:40.8s/over → v2:25.1s/ok → v3:25.1s/ok | M01, M02 | ✅ 一致 |
+| mock/01_normal | completed | 7/7 | 25.1 / 30.0 | v1:40.8s/over → v2:25.1s/ok → v3:25.1s/ok | M01, M02 | ❌ 独立重跑规则检查未通过：shot 4 UNSUPPORTED_FACT_CONDITIONS、shot 4 UNSUPPORTED_QUANTIFIED_CLAIM |
 | mock/02_reference_p01 | completed | 5/5 | 25.1 / 30.0 | v1:36.7s/over → v2:25.1s/ok | P01 | ✅ 一致 |
 | mock/02b_reference_user_draft | completed | 8/8 | 24.7 / 30.0 | v1:38.9s/over → v2:27.9s/ok → v3:23.3s/under → v4:24.7s/ok | P01 | ✅ 一致 |
 | mock/03_missing_info | needs_input | 1/1 | - / - | - | - | ✅ 一致 |
 | mock/03b_missing_info_answered | completed | 8/8 | 18.5 / 20.0 | v1:32.3s/over → v2:21.5s/over → v3:18.5s/ok | M01 | ✅ 一致 |
 | mock/04_no_material | needs_input | 3/3 | - / 20.0 | - | - | ✅ 一致 |
 | mock/05_query_rewrite | completed | 7/7 | 19.4 / 20.0 | v1:34.1s/over → v2:22.6s/over → v3:19.4s/ok | M01 | ✅ 一致 |
-| mock/06_tool_failure_transient | completed | 8/8 | 25.1 / 30.0 | v1:40.8s/over → v2:25.1s/ok → v3:25.1s/ok | M01, M02 | ✅ 一致 |
+| mock/06_tool_failure_transient | completed | 8/8 | 25.1 / 30.0 | v1:40.8s/over → v2:25.1s/ok → v3:25.1s/ok | M01, M02 | ❌ 独立重跑规则检查未通过：shot 4 UNSUPPORTED_FACT_CONDITIONS、shot 4 UNSUPPORTED_QUANTIFIED_CLAIM |
 | mock/07_tool_failure_permanent | failed | 4/4 | - / 20.0 | v1:未估算 | P01 | ✅ 一致 |
 | mock/08_overtime_infeasible | failed | 6/6 | 30.7 / 3.0 | v1:73.0s/over → v2:45.3s/over → v3:34.0s/over → v4:30.7s/over | M01, M02, M03, M05, M06 | ✅ 一致 |
 | mock/09_rule_violation | completed | 9/9 | 20.7 / 25.0 | v1:30.2s/over → v2:19.4s/under → v3:20.8s/ok → v4:19.9s/under → v5:20.7s/ok | M01 | ✅ 一致 |
 | mock/10_step_limit | incomplete | 3/3 | 25.1 / 30.0 | v1:40.8s/over → v2:25.1s/ok | M01, M02 | ✅ 一致 |
-| review-2026-11-11/03b_missing_info_answered | completed | 6/7 | 18.5 / 20.0 | v1:23.5s/over → v2:18.5s/ok | M01, M04, M05, M06 | ✅ 一致 |
+| review-2026-11-11/03b_missing_info_answered | completed | 6/7 | 18.5 / 20.0 | v1:23.5s/over → v2:18.5s/ok | M01, M04, M05, M06 | ❌ 独立重跑规则检查未通过：shot 3 UNSUPPORTED_QUANTIFIED_CLAIM、shot 5 UNSUPPORTED_FACT_CONDITIONS、shot 5 UNSUPPORTED_QUANTIFIED_CLAIM |
+| review-2026-11-11/battery_life_draft | completed | 9/10 | 17.3 / 20.0 | v1:未估算 → v2:20.1s/over → v3:15.7s/under → v4:17.3s/ok → v5:17.3s/ok | M02 | ✅ 一致 |
 
 ## 已完成脚本：素材 ID × 分镜 × 时长 逐一对应
 
@@ -223,3 +224,14 @@
 | 5 | 3.1 | M06 | 首发 399，帧跃 M2。 |
 
 合计 18.5s，区间 [16.0, 20.0]；时长检查版本 v2、规则检查版本 v2，规则提示 无
+
+### review-2026-11-11/battery_life_draft（v5）
+
+| 镜号 | 时长(s) | 素材 ID | 旁白 |
+|---|---|---|---|
+| 1 | 3.4 | - | 口播录到一半没电，最崩溃。 |
+| 2 | 4.0 | M02 | 帧跃 M2 发射器，续航约 8 小时。 |
+| 3 | 6.2 | M02 | 这个数有条件：单次充满，连续录音，实验室，关闭降噪。 |
+| 4 | 3.7 | M02 | 出门拍摄心里有底，帧跃 M2。 |
+
+合计 17.3s，区间 [16.0, 20.0]；时长检查版本 v5、规则检查版本 v5，规则提示 无

@@ -261,7 +261,9 @@ class MockPolicy:
             line = _strip_parens(m["fact"])
             narration = f"{line}{_ELABORATION}" if verbose else line
             shots.append({"shot_id": len(shots) + 1, "visual": f"产品特写 + 讲解（对应 {m['id']}）",
-                          "narration": narration, "subtitle": _first_clause(line), "source_ids": [m["id"]],
+                          "narration": narration, "subtitle": "" if m.get("quantified_fact") else _first_clause(line),
+                          "screen_note": m.get("required_disclaimer", "") if m.get("quantified_fact") else "",
+                          "source_ids": [m["id"]],
                           "_mid": m["id"]})
             if m["type"] == "feature" and not any(s.get("_demo") for s in shots):
                 shots.append({"shot_id": len(shots) + 1, "visual": f"屏幕录制/实拍演示该功能（对应 {m['id']}）",
@@ -308,8 +310,9 @@ class MockPolicy:
             return self._clean(draft)
         # 2) 事实句只保留第一个分句
         changed = False
+        quantified_ids = {m["id"] for m in self.materials if m.get("quantified_fact")}
         for s in shots:
-            if s.get("_mid") and re.search(r"[，：]", s["narration"]):
+            if s.get("_mid") and s["_mid"] not in quantified_ids and re.search(r"[，：]", s["narration"]):
                 s["narration"] = re.split(r"[，：]", s["narration"])[0] + "。"
                 changed = True
         if changed:
@@ -392,16 +395,26 @@ class MockPolicy:
             elif code == "TITLE_TOO_LONG":
                 limit = int(re.search(r"上限 (\d+)", v["detail"]).group(1))
                 draft["title"] = draft["title"][:limit]
-            elif code in ("UNSUPPORTED_FEATURE", "UNSUPPORTED_NUMBER", "UNSUPPORTED_EFFECT_CLAIM", "MISSING_SOURCE"):
+            elif code in ("UNSUPPORTED_FEATURE", "UNSUPPORTED_NUMBER", "UNSUPPORTED_EFFECT_CLAIM", "MISSING_SOURCE",
+                          "UNSUPPORTED_QUANTIFIED_CLAIM", "UNSUPPORTED_FACT_CONDITIONS"):
                 note = f"删除了无素材依据的表述（{code}，{v['where']}）：{v['detail']}"
                 if note not in self.risks:
                     self.risks.append(note)
                 idx = int(v["where"].split()[-1]) - 1 if v["where"].startswith("shot") else None
                 if idx is not None and draft["shots"][idx]["source_ids"]:
                     mid = draft["shots"][idx]["source_ids"][0]
-                    line = _strip_parens(by_id[mid]["fact"])
-                    draft["shots"][idx]["narration"] = line if draft["shots"][idx]["narration"] else ""
-                    draft["shots"][idx]["subtitle"] = _first_clause(line)
+                    material = by_id[mid]
+                    line = _strip_parens(material["fact"])
+                    current = draft["shots"][idx]
+                    if material.get("quantified_fact"):
+                        field = "narration" if current["narration"] else "subtitle"
+                        current[field] = line
+                        if field == "narration":
+                            current["subtitle"] = ""
+                        current["screen_note"] = material["required_disclaimer"]
+                    else:
+                        current["narration"] = line if current["narration"] else ""
+                        current["subtitle"] = _first_clause(line)
                 elif idx is not None:  # 无来源的镜头里出现了事实表述：改成不含事实的中性句
                     draft["shots"][idx]["narration"] = "来看看它能帮你做什么。"
                     draft["shots"][idx]["subtitle"] = "来看看它能做什么"

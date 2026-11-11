@@ -1,0 +1,30 @@
+{
+  "case_id": "battery_life_draft",
+  "description": "先核对含错误单位的续航草稿，再修正并提交",
+  "brief": {
+    "topic": "帧跃 M2 续航",
+    "product": "帧跃 M2 无线麦克风",
+    "platform": "抖音",
+    "audience": "口播创作者",
+    "target_duration_sec": 20,
+    "style": "干货讲解",
+    "must_include": [
+      "续航"
+    ],
+    "request": "先检索素材，直接用 check_rules 检查下面原稿的事实，再根据工具返回修正，保留续航卖点及测试条件，完成可编辑脚本。",
+    "draft_script": {
+      "title": "帧跃 M2 续航实测",
+      "shots": [
+        {
+          "visual": "麦克风发射器特写",
+          "narration": "帧跃 M2 发射器续航约 8 分钟。",
+          "subtitle": "续航约 8 分钟",
+          "screen_note": "单次充满后在实验室关闭降噪连续录音",
+          "source_ids": [
+            "M02"
+          ]
+        }
+      ]
+    }
+  }
+}

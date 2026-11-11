@@ -231,6 +231,24 @@ def test_rule_check_can_be_repeated_after_retrieving_a_cited_source(store, rules
     assert res.output["script_version"] == "v1"
 
 
+def test_battery_unit_mismatch_blocks_submission_until_corrected(store, rules):
+    source = ("search_materials", {"query": "续航", "product": "帧跃 M2 无线麦克风"})
+    good = shot("帧跃 M2 发射器续航约 8 小时。", ["M02"], hold_sec=22,
+                screen_note="单次充满后在实验室关闭降噪连续录音")
+    wrong = {**good, "narration": good["narration"].replace("小时", "分钟")}
+    args = [{"script": {"title": "帧跃 M2 续航", "shots": [s]}} for s in (wrong, good)]
+    steps = [source, *[(tool, arg) for arg in args for tool in
+                        ("estimate_duration", "check_rules", "submit_script")]]
+    res = make_agent(store, rules, steps, limits=Limits(max_steps=7)).run(brief(product="帧跃 M2 无线麦克风"))
+    observations = [json.loads(m["content"]) for m in res.messages if m["role"] == "tool"]
+    assert observations[1]["passed"]
+    assert not observations[2]["passed"]
+    assert observations[3]["error_type"] == "VERIFICATION_REQUIRED"
+    assert res.output["status"] == "completed"
+    assert res.output["script_version"] == "v2"
+    assert res.output["shots"][0]["narration"] == good["narration"]
+
+
 @pytest.mark.parametrize(("args", "error_type"), [
     ("[]", "INVALID_ARGUMENTS"),
     ("null", "INVALID_ARGUMENTS"),

@@ -129,4 +129,6 @@ class MaterialStore:
         }
         if m.get("required_disclaimer"):
             view["required_disclaimer"] = m["required_disclaimer"]
+        if fact := m.get("quantified_fact"):
+            view["quantified_fact"] = {key: fact[key] for key in ("metric", "values", "unit")}
         return view

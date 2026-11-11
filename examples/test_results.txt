@@ -1,3 +1,11 @@
+2026-11-11 量化事实核验
+- Python 3.14: python -m pytest -q → 108 passed, 1 skipped。
+- Python 3.11: 新跑 12 个 Mock 用例 → 7 completed / 2 needs_input / 2 failed / 1 incomplete。
+  用 python scripts/verify_examples.py --runs <批量输出目录> 核对，12/12 通过。
+- DeepSeek 续航草稿：原稿“8 分钟”被规则拒绝，修正稿 completed（17.3s / 20s，9 轮 / 10 次工具调用）。
+  用当前规则核对新稿通过。见 review-2026-11-11/battery_life_draft/trace.md。
+- 存档审计：旧版 26 份有 8 份未通过新规则。新续航样例通过。
+
 2026-11-11 第二次复查
 - Python 3.14: python -m pytest -q → 92 passed, 1 skipped（默认跳过既有 live 测试）。
 - Python 3.11: python main.py batch --llm mock --workers 4 --out examples/runs/review-mock
