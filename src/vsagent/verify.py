@@ -46,8 +46,10 @@ def _verify_completed(output, store, rules) -> list[str]:
         problems.append("completed 但时长检查未通过")
     if not r or not r["passed"]:
         problems.append("completed 但规则检查未通过")
-    if d and r and d["script_version"] != r["script_version"]:
-        problems.append(f"时长检查版本 {d['script_version']} 与规则检查版本 {r['script_version']} 不一致")
+    version = output.get("script_version")
+    for label, check in (("时长", d), ("规则", r)):
+        if check and check.get("script_version") != version:
+            problems.append(f"{label}检查版本 {check.get('script_version')} 与交付脚本版本 {version} 不一致")
 
     shots = output["shots"]
     total = round(sum(s["duration_sec"] for s in shots), 1)
@@ -70,6 +72,8 @@ def _verify_completed(output, store, rules) -> list[str]:
         {k: s.get(k) for k in ("visual", "narration", "subtitle", "screen_note", "hold_sec", "source_ids")}
         for s in shots]})
     brief = Brief.from_dict(output["brief_final"])
+    if missing := brief.missing_required():
+        return [*problems, f"completed 但最终简报缺少关键字段：{missing}"]
     re_d = duration_tool.estimate(script, brief.target_duration_sec, brief.style, rules["duration_policy"])
     for s, p in zip(shots, re_d["per_shot"]):
         if abs(p["sec"] - s["duration_sec"]) > 0.05:
@@ -77,8 +81,10 @@ def _verify_completed(output, store, rules) -> list[str]:
     if not re_d["passed"]:
         problems.append(f"独立重算总时长 {re_d['total_sec']}s 不在允许区间 {re_d['allowed_range_sec']}")
     checker = RuleChecker(rules, store.brand)
+    product = store.resolve_product(brief.product)
     re_r = checker.check(script, brief, {i: store.by_id[i] for i in retrieved if i in store.by_id},
-                         set(store.by_id))
+                         set(store.by_id), product["product_id"] if product else None)
     if not re_r["passed"]:
-        problems.append(f"独立重跑规则检查未通过：{[v['code'] for v in re_r['violations']]}")
+        failures = "、".join(f"{v['where']} {v['code']}" for v in re_r["violations"])
+        problems.append(f"独立重跑规则检查未通过：{failures}")
     return problems

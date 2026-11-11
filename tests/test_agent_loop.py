@@ -2,6 +2,9 @@
 
 用 ScriptedLLM（预设工具调用序列）驱动，验证的是代码护栏本身，与模型好坏无关。
 """
+import json
+
+import pytest
 from conftest import ScriptedLLM, shot
 
 from vsagent.agent import ScriptAgent
@@ -189,3 +192,82 @@ def test_update_brief_rejects_values_not_in_user_reply(store, rules):
     assert final["audience"] == "想做口播的上班族"
     assert final["style"] is None
     assert "假设" in res.messages[-1]["content"]
+
+
+@pytest.mark.parametrize(("field", "reply", "script", "target", "tool"), [
+    ("platform", "小红书", {**GOOD, "title": GOOD["title"] * 3}, 25, "check_rules"),
+    ("style", "慢节奏", GOOD, 22, "estimate_duration"),
+])
+def test_checks_expire_when_brief_changes(store, rules, field, reply, script, target, tool):
+    check_args = {"script": script}
+    steps = [SEARCH, ("estimate_duration", check_args), ("check_rules", check_args),
+             ("request_user_input", {"questions": ["请补充信息"]}), ("update_brief", {field: reply}),
+             ("submit_script", check_args), (tool, check_args)]
+    res = make_agent(store, rules, steps, limits=Limits(max_steps=7), answers=[reply]).run(
+        brief(target_duration_sec=target, **{field: None}))
+    observations = [json.loads(m["content"]) for m in res.messages if m["role"] == "tool"]
+    assert all(o["passed"] for o in observations[1:3])
+    assert observations[5]["error_type"] == "VERIFICATION_REQUIRED"
+    assert observations[6]["ok"] and not observations[6]["passed"]
+    assert observations[6]["script_version"] == "v1"
+    assert res.output["status"] == "incomplete"
+
+
+def test_submit_requires_complete_brief(store, rules):
+    args = {"script": GOOD}
+    steps = [SEARCH, ("estimate_duration", args), ("check_rules", args), ("submit_script", args)]
+    res = make_agent(store, rules, steps, limits=Limits(max_steps=4)).run(brief(platform=None))
+    assert json.loads(res.messages[-1]["content"])["error_type"] == "MISSING_BRIEF"
+    assert res.output["status"] == "incomplete"
+
+
+def test_rule_check_can_be_repeated_after_retrieving_a_cited_source(store, rules):
+    args = {"script": GOOD}
+    steps = [("check_rules", args), SEARCH, ("check_rules", args),
+             ("estimate_duration", args), ("submit_script", args)]
+    res = make_agent(store, rules, steps, limits=Limits(max_steps=5)).run(brief())
+    assert "UNKNOWN_SOURCE" in res.trace.tool_calls()[0]["result_summary"]
+    assert res.output["status"] == "completed"
+    assert res.output["script_version"] == "v1"
+
+
+def test_battery_unit_mismatch_blocks_submission_until_corrected(store, rules):
+    source = ("search_materials", {"query": "续航", "product": "帧跃 M2 无线麦克风"})
+    good = shot("帧跃 M2 发射器续航约 8 小时。", ["M02"], hold_sec=22,
+                screen_note="单次充满后在实验室关闭降噪连续录音")
+    wrong = {**good, "narration": good["narration"].replace("小时", "分钟")}
+    args = [{"script": {"title": "帧跃 M2 续航", "shots": [s]}} for s in (wrong, good)]
+    steps = [source, *[(tool, arg) for arg in args for tool in
+                        ("estimate_duration", "check_rules", "submit_script")]]
+    res = make_agent(store, rules, steps, limits=Limits(max_steps=7)).run(brief(product="帧跃 M2 无线麦克风"))
+    observations = [json.loads(m["content"]) for m in res.messages if m["role"] == "tool"]
+    assert observations[1]["passed"]
+    assert not observations[2]["passed"]
+    assert observations[3]["error_type"] == "VERIFICATION_REQUIRED"
+    assert res.output["status"] == "completed"
+    assert res.output["script_version"] == "v2"
+    assert res.output["shots"][0]["narration"] == good["narration"]
+
+
+@pytest.mark.parametrize(("args", "error_type"), [
+    ("[]", "INVALID_ARGUMENTS"),
+    ("null", "INVALID_ARGUMENTS"),
+    ({"script": {**GOOD, "shots": [{**GOOD["shots"][0], "source_ids": 1}]}}, "INVALID_SCRIPT"),
+    ({"script": {**GOOD, "shots": [{**GOOD["shots"][0], "hold_sec": "Infinity"}]}}, "INVALID_SCRIPT"),
+])
+def test_bad_tool_payload_returns_observation_and_run_continues(store, rules, args, error_type):
+    valid = {"script": GOOD}
+    steps = [("estimate_duration", args), SEARCH, ("estimate_duration", valid),
+             ("check_rules", valid), ("submit_script", valid)]
+    res = make_agent(store, rules, steps, limits=Limits(max_steps=5)).run(brief())
+    first_observation = next(m for m in res.messages if m["role"] == "tool")
+    assert json.loads(first_observation["content"])["error_type"] == error_type
+    assert res.output["status"] == "completed"
+
+
+@pytest.mark.parametrize("reply", ["120 秒", "面向 20 岁的用户，时长 30 秒"])
+def test_duration_update_requires_the_confirmed_number_of_seconds(store, rules, reply):
+    steps = [("request_user_input", {"questions": ["多长？"]}), ("update_brief", {"target_duration_sec": 20})]
+    res = make_agent(store, rules, steps, limits=Limits(max_steps=2), answers=[reply]).run(
+        brief(target_duration_sec=None))
+    assert res.output["brief_final"]["target_duration_sec"] is None

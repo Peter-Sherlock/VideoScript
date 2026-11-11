@@ -7,7 +7,9 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import replace
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -19,25 +21,70 @@ from .render import render_markdown
 from .schema import Brief
 from .tools import AnswerProvider, FaultPlan, MaterialStore
 
+_CASE_ID = re.compile(r"[\w-]+(?:\.[\w-]+)*")
+_WINDOWS_DEVICE = re.compile(r"con|prn|aux|nul|com[1-9¹²³]|lpt[1-9¹²³]", re.IGNORECASE)
+
 
 def load_case(path: Path) -> dict[str, Any]:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"{path.name} 的输入必须是 JSON 对象")
     if "brief" not in data:  # 也允许直接传简报
         data = {"brief": data}
     data.setdefault("run_options", {})
     data.setdefault("case_id", Path(path).stem)
+    try:
+        Brief.from_dict(data["brief"])
+        _case_options(data)
+    except ValueError as exc:
+        raise ValueError(f"{path.name}：{exc}") from exc
     return data
+
+
+def _case_options(case: dict[str, Any]) -> dict[str, Any]:
+    opts = case.get("run_options", {})
+    if not isinstance(opts, dict):
+        raise ValueError("run_options 必须是 JSON 对象")
+    overrides = opts.get("limits", {})
+    if not isinstance(overrides, dict) or overrides.keys() - vars(Limits()).keys():
+        raise ValueError("run_options.limits 必须是只含已知上限字段的 JSON 对象")
+    Limits(**overrides)
+    for key in ("faults", "answers"):
+        items = opts.get(key, [])
+        if not isinstance(items, list) or any(not isinstance(item, str) for item in items):
+            raise ValueError(f"run_options.{key} 必须是字符串数组")
+    return opts
+
+
+def _batch_targets(cases: list[dict[str, Any]], out_dir: Path) -> list[Path]:
+    root = out_dir.resolve()
+    names, seen_paths, targets = set(), set(), []
+    for case in cases:
+        name = case["case_id"]
+        if (not isinstance(name, str) or not _CASE_ID.fullmatch(name)
+                or _WINDOWS_DEVICE.fullmatch(name.partition(".")[0])):
+            raise ValueError(f"case_id 不是有效的输出目录名：{name!r}")
+        target = (root / name).resolve()
+        if target == root or not target.is_relative_to(root):
+            raise ValueError(f"case_id {name!r} 的输出目录不在 --out 下")
+        if name.casefold() in names or target in seen_paths:
+            raise ValueError(f"case_id {name!r} 的输出目录与另一用例重复")
+        names.add(name.casefold())
+        seen_paths.add(target)
+        targets.append(target)
+    return targets
 
 
 def run_case(case: dict[str, Any], llm_provider: str | None, out_dir: Path | None,
              faults: list[str] | None = None, answers: list[str] | None = None,
              interactive: bool = False, limits: Limits | None = None) -> dict[str, Any]:
-    opts = case.get("run_options", {})
+    opts = _case_options(case)
+    brief = Brief.from_dict(case["brief"])
+    limits = limits if limits is not None else Limits.from_env()
+    limits = replace(limits, **{key: min(value, getattr(limits, key))
+                                for key, value in opts.get("limits", {}).items()})
     settings = LLMSettings.from_env(llm_provider)
     llm = create_llm(settings)
-    limits = Limits(**vars(limits)) if limits else Limits.from_env()
-    for key, value in (opts.get("limits") or {}).items():  # 用例可单独收紧上限（演示 incomplete）
-        setattr(limits, key, int(value))
     agent = ScriptAgent(
         llm=llm,
         store=MaterialStore(MATERIALS_PATH),
@@ -46,7 +93,7 @@ def run_case(case: dict[str, Any], llm_provider: str | None, out_dir: Path | Non
         faults=FaultPlan.parse(faults if faults is not None else opts.get("faults")),
         answers=AnswerProvider(answers if answers is not None else opts.get("answers"), interactive=interactive),
     )
-    result = agent.run(Brief.from_dict(case["brief"]))
+    result = agent.run(brief)
     output = {"case_id": case["case_id"], "case_description": case.get("description"), **result.output}
     if out_dir:
         out_dir.mkdir(parents=True, exist_ok=True)
@@ -77,7 +124,7 @@ def main(argv: list[str] | None = None) -> int:
             stream.reconfigure(encoding="utf-8", errors="replace")
         except (AttributeError, ValueError, OSError):  # 被测试框架替换过的流等情况，保持原样
             pass
-    parser =argparse.ArgumentParser(prog="vsagent", description="短视频脚本 Agent")
+    parser = argparse.ArgumentParser(prog="vsagent", description="短视频脚本 Agent")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     p_run = sub.add_parser("run", help="运行单个用例")
@@ -99,16 +146,20 @@ def main(argv: list[str] | None = None) -> int:
         p.add_argument("--max-tool-calls", type=int)
 
     args = parser.parse_args(argv)
-    limits = Limits.from_env()
-    if args.max_steps:
-        limits.max_steps = args.max_steps
-    if args.max_tool_calls:
-        limits.max_tool_calls = args.max_tool_calls
-
     try:  # 先校验输入文件和故障参数，给出可读的错误而不是异常堆栈
+        limits = replace(Limits.from_env(), **{
+            key: value for key in ("max_steps", "max_tool_calls")
+            if (value := getattr(args, key)) is not None
+        })
         cases = ([load_case(Path(args.input))] if args.cmd == "run"
                  else [load_case(f) for f in sorted(Path(args.inputs).glob("*.json"))
                        if not args.only or any(f.stem.startswith(p) for p in args.only)])
+        if args.cmd == "batch":
+            if not cases:
+                raise ValueError(f"没有匹配的用例：{args.inputs}")
+            if args.workers < 1:
+                raise ValueError("--workers 必须是正整数")
+            targets = _batch_targets(cases, Path(args.out))
         for c in cases:
             FaultPlan.parse(args.fault if args.cmd == "run" and args.fault else c["run_options"].get("faults"))
     except FileNotFoundError as exc:
@@ -130,9 +181,9 @@ def main(argv: list[str] | None = None) -> int:
             if not args.out:
                 print(render_markdown(output))
         else:
-            with ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:  # 用例之间互不共享状态
-                futures = [pool.submit(run_case, c, args.llm, Path(args.out) / c["case_id"], limits=limits)
-                           for c in cases]
+            with ThreadPoolExecutor(max_workers=args.workers) as pool:  # 用例之间互不共享状态
+                futures = [pool.submit(run_case, c, args.llm, target, limits=limits)
+                           for c, target in zip(cases, targets)]
                 for fut in futures:
                     _print_summary(fut.result())
     except LLMError as exc:

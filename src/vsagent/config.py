@@ -38,6 +38,11 @@ class Limits:
     max_tool_calls: int = 24     # 全部工具调用次数上限
     max_calls_per_tool: int = 8  # 单个工具调用次数上限（防止对同一工具死循环）
 
+    def __post_init__(self) -> None:
+        for name, value in vars(self).items():
+            if type(value) is not int or value <= 0:
+                raise ValueError(f"{name} 必须是正整数")
+
     @classmethod
     def from_env(cls) -> "Limits":
         return cls(

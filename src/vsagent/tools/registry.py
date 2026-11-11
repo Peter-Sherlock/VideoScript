@@ -2,22 +2,25 @@
 
 模型只能通过这里的工具与外部交互。几个关键约束：
 - 素材必须先被检索到，才能被脚本引用（retrieved）。
-- 时长/规则检查结果按“脚本指纹”记录；submit_script 只接受【同一版本】两项检查都通过的脚本。
+- 时长/规则检查结果按“脚本指纹”记录，相关检查条件变化时作废；提交须有完整简报和当前检查结果。
 - update_brief 只能填补缺失字段，且必须在用户补充信息之后，模型不能自己改目标时长来“通过”检查。
 - 故障注入只影响工具返回值（返回结构化错误），是否重试/放弃由模型决定，代码不自动重试。
 """
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
-from ..schema import Brief, ScriptError, normalize_script, script_fingerprint
+from ..schema import Brief, ScriptError, normalize_script, parse_target_duration, script_fingerprint
 from . import duration as duration_tool
 from .materials import MaterialStore
 from .rules import RuleChecker
 
 TERMINAL_TOOLS = {"submit_script", "report_failure", "request_user_input"}
+_SECONDS = re.compile(r"(?<![\d.+-])([0-9]+(?:\.[0-9]+)?)(?=\s*(?:秒|s\b))", re.IGNORECASE)
+_BARE_NUMBER = re.compile(r"[0-9]+(?:\.[0-9]+)?")
 
 _REASON = {
     "type": "string",
@@ -227,12 +230,16 @@ class ToolSession:
     def execute(self, name: str, raw_args: str | dict[str, Any]) -> ToolOutcome:
         if isinstance(raw_args, str):
             try:
-                args = json.loads(raw_args or "{}")
+                args = json.loads(raw_args)
             except json.JSONDecodeError as exc:
                 return ToolOutcome(False, {"ok": False, "error_type": "INVALID_ARGUMENTS",
                                            "message": f"参数不是合法 JSON：{exc}"}, "参数 JSON 解析失败")
         else:
-            args = dict(raw_args)
+            args = raw_args
+        if not isinstance(args, dict):
+            return ToolOutcome(False, {"ok": False, "error_type": "INVALID_ARGUMENTS",
+                                       "message": "工具参数必须是 JSON 对象"}, "参数不是 JSON 对象")
+        args = dict(args)
         args.pop("decision_reason", None)
         handler = getattr(self, f"_tool_{name}", None)
         if handler is None:
@@ -272,8 +279,13 @@ class ToolSession:
     def _tool_search_materials(self, args):
         query, product = args.get("query", ""), args.get("product")
         result = self.store.search(query, product=product, material_types=args.get("material_types"))
+        newly_retrieved = {item["id"] for item in result["items"]} - self.retrieved.keys()
         for item in result["items"]:
             self.retrieved[item["id"]] = self.store.by_id[item["id"]]
+        if newly_retrieved:
+            for fp in list(self.rule_results):
+                if any(newly_retrieved.intersection(shot["source_ids"]) for shot in self.scripts[fp]["shots"]):
+                    del self.rule_results[fp]
         self.search_history.append({"query": query, "product": product, "count": result["count"]})
         ids = [i["id"] for i in result["items"]]
         summary = f"命中 {result['count']} 条 {ids}" if ids else f"命中 0 条；{result.get('hint', '')}"
@@ -362,30 +374,66 @@ class ToolSession:
             if getattr(self.brief, key):
                 rejected[key] = "用户已给定该字段，不允许修改"
                 continue
-            value = float(args[key]) if key == "target_duration_sec" else str(args[key])
-            if not self._grounded_in_replies(value):
+            if key == "target_duration_sec":
+                try:
+                    value = parse_target_duration(args[key])
+                except ValueError as exc:
+                    rejected[key] = str(exc)
+                    continue
+                if not self._duration_in_replies(value):
+                    rejected[key] = "用户回答未明确确认这个秒数；请向用户确认"
+                    continue
+            elif isinstance(args[key], str) and args[key].strip():
+                value = args[key].strip()
+            else:
+                rejected[key] = "必须是非空文本"
+                continue
+            if key != "target_duration_sec" and not self._grounded_in_replies(value):
                 # 真实运行发现：模型把自己假设的风格写进简报，而风格会影响时长口径（语速）
                 rejected[key] = "用户回答中没有提到该内容；属于你的假设，请写进 risks，不要写入简报"
                 continue
             setattr(self.brief, key, value)
             updated[key] = value
+        invalidated = []
+        if self.duration_results and updated.keys() & {"target_duration_sec", "style"}:
+            self.duration_results.clear()
+            invalidated.append("estimate_duration")
+        if self.rule_results and updated.keys() & {"platform", "product"}:
+            self.rule_results.clear()
+            invalidated.append("check_rules")
         content = {"ok": bool(updated), "updated": updated, "rejected": rejected,
                    "brief": self.brief.to_dict(), "still_missing": self.brief.missing_required()}
+        summary = f"更新 {updated}；拒绝 {list(rejected)}"
+        if invalidated:
+            content["invalidated_checks"] = invalidated
+            content["note"] = "简报变更，相关检查已失效；提交前请按当前简报重新调用对应工具"
+            summary += f"；检查失效 {invalidated}"
         budget = duration_tool.narration_budget(self.brief.target_duration_sec, self.brief.style,
                                                 self.rules["duration_policy"])
         if budget and "target_duration_sec" in updated:
             content["writing_hint"] = budget
-        return ToolOutcome(bool(updated), content, f"更新 {updated}；拒绝 {list(rejected)}", arg_summary=dict(args))
+        return ToolOutcome(bool(updated), content, summary, arg_summary=dict(args))
 
-    def _grounded_in_replies(self, value: Any) -> bool:
-        """写入简报的值必须能在用户回答里找到：数字原样出现，文本至少 60% 的字出现在回答中。"""
+    def _duration_in_replies(self, value: float) -> bool:
+        for reply in self.user_replies:
+            reply = reply.strip()
+            candidates = [reply] if _BARE_NUMBER.fullmatch(reply) else _SECONDS.findall(reply)
+            if any(float(seconds) == value for seconds in candidates):
+                return True
+        return False
+
+    def _grounded_in_replies(self, value: str) -> bool:
+        """文本至少 60% 的不同字符出现在用户回答中。"""
         replies = " ".join(self.user_replies)
-        if isinstance(value, float):
-            return f"{value:g}" in replies
-        chars = {c for c in str(value) if not c.isspace()}
+        chars = {c for c in value if not c.isspace()}
         return bool(chars) and len(chars & set(replies)) / len(chars) >= 0.6
 
     def _tool_submit_script(self, args):
+        missing = self.brief.missing_required()
+        if missing:
+            return ToolOutcome(False, {"ok": False, "error_type": "MISSING_BRIEF", "missing": missing,
+                                       "message": "任务简报缺少关键字段，请向用户确认并补齐后再提交"},
+                               f"提交被拒绝：简报缺少 {missing}", arg_summary=self._arg_summary("submit_script", args))
         script = normalize_script(args.get("script"))
         fp, ver = self._version(script)
         d, r = self.duration_results.get(fp), self.rule_results.get(fp)

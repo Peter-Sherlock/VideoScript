@@ -59,7 +59,8 @@ class ScriptedLLM:
         for name, args in calls:
             self.n += 1
             tool_calls.append(ToolCall(id=f"c{self.n}", name=name,
-                                       arguments=json.dumps({**args, "decision_reason": "test"}, ensure_ascii=False)))
+                                       arguments=args if isinstance(args, str) else
+                                       json.dumps({**args, "decision_reason": "test"}, ensure_ascii=False)))
         msg = {"role": "assistant", "content": "",
                "tool_calls": [{"id": c.id, "type": "function",
                                "function": {"name": c.name, "arguments": c.arguments}} for c in tool_calls]}

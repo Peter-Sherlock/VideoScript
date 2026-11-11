@@ -82,11 +82,11 @@ python main.py batch --llm deepseek --out examples/deepseek
 
 ```bash
 python -m pytest -q
+python main.py batch --llm mock --out examples/runs/mock
+python scripts/verify_examples.py --runs examples/runs/mock
 ```
 
-```bash
-python scripts/verify_examples.py
-```
+直接运行 `python scripts/verify_examples.py` 会用当前规则复查 Git 中的存档并生成报告。旧稿若缺少新增规则要求的指标、单位或适用条件，报告会标明原因，命令以退出码 1 结束。
 
 可选：真实模型冒烟测试（会调用 API）：在 `.env` 配好 Key 后设置环境变量 `RUN_LIVE=1` 再运行 pytest。
 
@@ -98,6 +98,8 @@ python scripts/verify_examples.py
 | `--fault 工具名:transient[:n]` / `工具名:permanent` | 前 n 次失败 / 一直失败（可重复传） |
 | `--answer "..."` / `--interactive` | 对 `request_user_input` 的预置回答 / 终端交互 |
 | `--max-steps N` / `--max-tool-calls N` | 执行上限，达到后返回 `incomplete` |
+
+`batch` 会先验证用例和输出目录；每个 `case_id` 必须是唯一、有效的目录名。用例的 `run_options.limits` 只能收紧现有执行上限。目标时长如已提供，须是有限正数（秒）。
 
 ## 输入与输出
 
@@ -123,7 +125,7 @@ python scripts/verify_examples.py
 | `output.json` | 同上的结构化版本，另含检索记录、初始/最终简报、运行统计 |
 | `trace.md` / `trace.jsonl` | 每一步：动作、工具参数摘要、返回摘要、模型给出的决策依据、后续动作 |
 
-任务状态：`completed`（同一版本通过时长与规则检查）/ `needs_input`（缺信息或缺素材，已提问）/ `failed`（明确无法满足，附原因与建议）/ `incomplete`（达到执行上限）。
+任务状态：`completed`（关键简报完整，同一稿件按当前条件通过时长与规则检查）/ `needs_input`（缺信息或缺素材，已提问）/ `failed`（明确无法满足，附原因与建议）/ `incomplete`（达到执行上限）。
 
 ## 验收点与用例对照
 

@@ -5,6 +5,8 @@
 - MISSING_SOURCE        分镜出现功能/数字表述，但没有标注素材来源
 - UNSUPPORTED_FEATURE   提到的功能词在所引素材中找不到
 - UNSUPPORTED_NUMBER    数字（含 80%、八成、两倍等）在所引素材中找不到
+- UNSUPPORTED_QUANTIFIED_CLAIM  指标、数值、单位无法共同匹配一条量化素材
+- UNSUPPORTED_FACT_CONDITIONS   量化声明缺少同镜适用条件，或与素材条件冲突
 - UNSUPPORTED_EFFECT_CLAIM  量化或强化的效果结论（如“效率提升80%”“大幅提升”）没有效果数据素材支撑
 - BANNED_WORD / WRONG_BRAND_NAME / MISSING_BRAND_MENTION / MISSING_DISCLAIMER
 - MISSING_TITLE / TITLE_TOO_LONG / MISSING_REQUIRED_POINT
@@ -17,25 +19,11 @@ import re
 from typing import Any
 
 from ..schema import shot_text
+from .facts import check_quantified_claims, cn_to_number
 
 _ARABIC = re.compile(r"(?<![A-Za-z0-9.])\d+(?:\.\d+)?")
-_CN_NUM = re.compile(r"([零一二两三四五六七八九十百千]+)\s*(成|倍|小时|个小时|分钟|秒|米|元|块|分|%|个百分点)")
-_CN_DIGIT = {"零": 0, "一": 1, "二": 2, "两": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
-_CN_UNIT = {"十": 10, "百": 100, "千": 1000}
+_CN_NUM = re.compile(r"([零一二两三四五六七八九十百千]+)\s*(成|倍|小时|个小时|分钟|秒|天|公里|米|公尺|元|块|分|%|个百分点)")
 _QUANTITY = re.compile(r"\d|%|倍|[一二两三四五六七八九十]成|翻倍")
-
-
-def cn_to_number(text: str) -> float | None:
-    total, current = 0, 0
-    for ch in text:
-        if ch in _CN_DIGIT:
-            current = _CN_DIGIT[ch]
-        elif ch in _CN_UNIT:
-            total += (current or 1) * _CN_UNIT[ch]
-            current = 0
-        else:
-            return None
-    return float(total + current)
 
 
 def extract_numbers(text: str) -> set[float]:
@@ -94,7 +82,8 @@ class RuleChecker:
                 else:
                     add(violations, "UNKNOWN_SOURCE", where, f"素材 ID {sid} 不存在", "只能引用检索结果中的素材 ID")
             all_cited.update(cited)
-            self._check_claims(text, cited, where, violations, warnings, add)
+            self._check_claims([shot[key] for key in ("narration", "subtitle", "screen_note")],
+                               cited, where, violations, warnings, add, brief_product_id)
             if brief_product_id:
                 others = [sid for sid, m in cited.items() if m["product_id"] not in (brief_product_id, "brand")]
                 if others:
@@ -102,7 +91,7 @@ class RuleChecker:
                         "确认是否需要跨产品引用")
 
         # 标题：没有单独的来源字段，按全片已引用素材核对
-        self._check_claims(title, all_cited, "title", violations, warnings, add)
+        self._check_claims([title], all_cited, "title", violations, warnings, add, brief_product_id)
 
         full_text = " ".join(full_text_parts)
         self._check_banned(full_text, violations, add)
@@ -124,13 +113,14 @@ class RuleChecker:
             "warnings": warnings,
             "source_ids_used": sorted(all_cited),
             "rules_checked": [
-                "素材来源可追溯", "功能/数字/效果表述有据", "广告极限词", "品牌名称与露出",
+                "素材来源可追溯", "功能/效果表述有据", "量化声明的指标、数值、单位及条件", "广告极限词", "品牌名称与露出",
                 "免责声明", "平台标题长度", "用户必含要点",
             ],
         }
 
     # ------------------------------------------------------------------
-    def _check_claims(self, text, cited, where, violations, warnings, add):
+    def _check_claims(self, parts, cited, where, violations, warnings, add, product_id):
+        text = " ".join(part for part in parts if part)
         if not text:
             return
         cited_text = " ".join(m["fact"] + " " + " ".join(m.get("keywords", [])) for m in cited.values())
@@ -147,11 +137,12 @@ class RuleChecker:
                 elif not _contains(cited_text, term):
                     add(violations, "UNSUPPORTED_FEATURE", where,
                         f"“{term}”在所引素材 {sorted(cited)} 中找不到依据", "删除该功能表述，或引用确有该功能的素材")
-        # 2) 数字必须能在所引素材中找到
-        nums = extract_numbers(text)
-        if nums:
-            supported = extract_numbers(cited_text)
-            missing = sorted(n for n in nums if n not in supported)
+        # 2) 量化素材要求同一条素材支持完整声明，其余素材沿用数字来源检查。
+        if any(m.get("quantified_fact") for m in cited.values()):
+            for code, detail, suggestion in check_quantified_claims(parts, cited, product_id):
+                add(violations, code, where, detail, suggestion)
+        else:
+            missing = sorted(extract_numbers(text) - extract_numbers(cited_text))
             if missing and not cited:
                 add(violations, "MISSING_SOURCE", where, f"出现数字 {[_fmt(n) for n in missing]} 但未标注素材来源",
                     "数字必须来自素材；标注来源或删除数字")

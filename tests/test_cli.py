@@ -1,6 +1,7 @@
 """命令行入口：README 中的命令可用；错误输入给出可读提示而不是异常堆栈。"""
 import json
 
+import pytest
 from conftest import ScriptedLLM
 
 from vsagent.agent import ScriptAgent
@@ -68,3 +69,55 @@ def test_interactive_answer_is_used(store, rules):
                         AnswerProvider(interactive=True, ask=lambda _p: "小红书，25秒"))
     final = agent.run(Brief.from_dict({"product": "帧跃 M2 无线麦克风"})).output["brief_final"]
     assert final["platform"] == "小红书" and final["target_duration_sec"] == 25.0
+
+
+@pytest.mark.parametrize(("payload", "message"), [
+    ("[]", "JSON 对象"),
+    ('{"brief": []}', "brief"),
+    ('{"target_duration_sec": "NaN"}', "正数"),
+    ('{"target_duration_sec": -1}', "正数"),
+    ('{"run_options": {"limits": {"max_steps": 0}}, "brief": {}}', "正整数"),
+])
+def test_malformed_case_is_reported_as_input_error(tmp_path, capsys, payload, message):
+    path = tmp_path / "bad.json"
+    path.write_text(payload, encoding="utf-8")
+    assert main(["run", "--input", str(path), "--llm", "mock"]) == 2
+    assert message in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("case_id", ["../escaped", "out:stream", "CON.txt"])
+def test_batch_rejects_unsafe_output_names(tmp_path, capsys, case_id):
+    inputs = tmp_path / "inputs"
+    inputs.mkdir()
+    case = json.loads((INPUTS / "01_normal.json").read_text(encoding="utf-8"))
+    (inputs / "bad.json").write_text(json.dumps({**case, "case_id": case_id}), encoding="utf-8")
+    assert main(["batch", "--inputs", str(inputs), "--out", str(tmp_path / "out"), "--llm", "mock"]) == 2
+    assert "case_id" in capsys.readouterr().err
+    assert not (tmp_path / "out").exists() and not (tmp_path / "escaped").exists()
+
+
+def test_case_limits_cannot_raise_cli_budget(tmp_path):
+    case = json.loads((INPUTS / "01_normal.json").read_text(encoding="utf-8"))
+    case["run_options"] = {"limits": {"max_steps": 9}}
+    path = tmp_path / "case.json"
+    path.write_text(json.dumps(case), encoding="utf-8")
+    out_dir = tmp_path / "out"
+    assert main(["run", "--input", str(path), "--out", str(out_dir), "--llm", "mock", "--max-steps", "1"]) == 0
+    out = json.loads((out_dir / "output.json").read_text(encoding="utf-8"))
+    assert out["status"] == "incomplete" and out["run"]["steps_used"] == 1
+
+
+def test_batch_reports_no_matching_cases(tmp_path, capsys):
+    assert main(["batch", "--inputs", str(tmp_path), "--out", str(tmp_path / "out"), "--llm", "mock"]) == 2
+    assert "没有匹配" in capsys.readouterr().err
+
+
+def test_batch_rejects_case_insensitive_output_collisions(tmp_path, capsys):
+    inputs, out = tmp_path / "inputs", tmp_path / "out"
+    inputs.mkdir()
+    case = json.loads((INPUTS / "01_normal.json").read_text(encoding="utf-8"))
+    for idx, name in enumerate(("example", "Example")):
+        (inputs / f"{idx}.json").write_text(json.dumps({**case, "case_id": name}), encoding="utf-8")
+    assert main(["batch", "--inputs", str(inputs), "--out", str(out), "--llm", "mock", "--workers", "2"]) == 2
+    assert "输出目录与另一用例重复" in capsys.readouterr().err
+    assert not out.exists()

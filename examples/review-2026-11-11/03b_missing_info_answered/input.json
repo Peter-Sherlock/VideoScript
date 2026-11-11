@@ -1,0 +1,17 @@
+{
+  "case_id": "03b_missing_info_answered",
+  "description": "缺关键信息 + 用户补充后继续：预置用户回答“发抖音，20 秒左右”",
+  "covers": [
+    "缺关键信息",
+    "补充后继续生成"
+  ],
+  "brief": {
+    "request": "帮我给帧跃 M2 麦克风写个带货视频脚本",
+    "product": "帧跃 M2 无线麦克风"
+  },
+  "run_options": {
+    "answers": [
+      "发抖音，20 秒左右，面向想做口播的上班族"
+    ]
+  }
+}
