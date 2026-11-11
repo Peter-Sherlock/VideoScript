@@ -1,3 +1,12 @@
+2026-11-11 第二次复查
+- Python 3.14: python -m pytest -q → 92 passed, 1 skipped（默认跳过既有 live 测试）。
+- Python 3.11: python main.py batch --llm mock --workers 4 --out examples/runs/review-mock
+  → 12 个用例均运行，7 completed / 2 needs_input / 2 failed / 1 incomplete，符合预期。
+- python scripts/verify_examples.py → 26 份输出全部一致（25 份原存档 + 新的 03b）。
+- DeepSeek 单独复跑 03b: completed，18.5s / 20s，6 轮 / 7 次工具调用；独立核对通过。
+  见 review-2026-11-11/03b_missing_info_answered/trace.md。
+
+2026-11-10 初次交付（保留原记录）
 ============================= test session starts =============================
 platform win32 -- Python 3.14.7, pytest-9.2.0, pluggy-1.7.0 -- C:\Python314\python.exe
 rootdir: F:\Agentic_systems\VideoScript

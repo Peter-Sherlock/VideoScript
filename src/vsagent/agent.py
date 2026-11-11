@@ -122,7 +122,8 @@ class ScriptAgent:
 def _safe_args(arguments: str) -> Any:
     try:
         data = json.loads(arguments or "{}")
-        data.pop("decision_reason", None)
+        if isinstance(data, dict):
+            data.pop("decision_reason", None)
         return data
     except json.JSONDecodeError:
         return arguments[:200]

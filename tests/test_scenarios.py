@@ -40,6 +40,14 @@ def test_status_and_independent_verification(outputs, store, rules, case_id):
     assert verify_output(out, store, rules) == []
 
 
+def test_verifier_checks_delivered_version_and_final_brief(outputs, store, rules):
+    output = outputs["02_reference_p01"]
+    edited = {**output, "script_version": "v999", "brief_final": {**output["brief_final"], "platform": None}}
+    problems = verify_output(edited, store, rules)
+    assert any("与交付脚本版本 v999 不一致" in p for p in problems)
+    assert any("缺少关键字段" in p and "platform" in p for p in problems)
+
+
 def test_reference_case_compresses_and_never_fabricates(outputs):
     out = outputs["02_reference_p01"]
     history = out["revision_history"]

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
@@ -10,6 +11,16 @@ BRIEF_FIELDS = (
     "topic", "product", "audience", "platform", "target_duration_sec",
     "style", "must_include", "extra_requirements", "request", "draft_script",
 )
+
+
+def parse_target_duration(value: Any) -> float:
+    try:
+        seconds = float(value)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError("target_duration_sec 必须是有限正数（秒）") from exc
+    if isinstance(value, bool) or not math.isfinite(seconds) or seconds <= 0:
+        raise ValueError("target_duration_sec 必须是有限正数（秒）")
+    return seconds
 
 
 @dataclass
@@ -27,14 +38,22 @@ class Brief:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "Brief":
+        if not isinstance(data, dict):
+            raise ValueError("brief 必须是 JSON 对象")
         kwargs = {k: data.get(k) for k in BRIEF_FIELDS if k in data}
-        brief = cls(**kwargs)
-        brief.must_include = [str(x) for x in (brief.must_include or []) if str(x).strip()]
-        if brief.target_duration_sec in ("", 0):
-            brief.target_duration_sec = None
-        if brief.target_duration_sec is not None:
-            brief.target_duration_sec = float(brief.target_duration_sec)
-        return brief
+        for key in ("topic", "product", "audience", "platform", "style", "extra_requirements", "request"):
+            value = kwargs.get(key)
+            if value is not None:
+                if not isinstance(value, str):
+                    raise ValueError(f"brief.{key} 必须是字符串")
+                kwargs[key] = value.strip() or None
+        points = kwargs.get("must_include")
+        if points is not None and (not isinstance(points, list) or any(not isinstance(x, str) for x in points)):
+            raise ValueError("brief.must_include 必须是字符串数组")
+        kwargs["must_include"] = [x.strip() for x in points or [] if x.strip()]
+        target = kwargs.get("target_duration_sec")
+        kwargs["target_duration_sec"] = None if target in (None, "") else parse_target_duration(target)
+        return cls(**kwargs)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -75,22 +94,28 @@ def normalize_script(raw: Any) -> dict[str, Any]:
     for idx, shot in enumerate(shots_raw, start=1):
         if not isinstance(shot, dict):
             raise ScriptError(f"第 {idx} 个分镜不是对象")
-        source_ids = shot.get("source_ids") or []
+        source_ids = shot.get("source_ids")
+        if source_ids is None:
+            source_ids = []
         if isinstance(source_ids, str):
             source_ids = [s.strip() for s in source_ids.replace("，", ",").split(",")]
-        hold = shot.get("hold_sec")
+        if not isinstance(source_ids, list) or any(not isinstance(s, str) for s in source_ids):
+            raise ScriptError(f"第 {idx} 个分镜 source_ids 必须是字符串数组")
+        raw_hold = shot.get("hold_sec")
         try:
-            hold = float(hold) if hold not in (None, "") else 0.0
-        except (TypeError, ValueError) as exc:
+            hold = float(raw_hold) if raw_hold not in (None, "") else 0.0
+        except (TypeError, ValueError, OverflowError) as exc:
             raise ScriptError(f"第 {idx} 个分镜 hold_sec 不是数字") from exc
+        if isinstance(raw_hold, bool) or not math.isfinite(hold) or hold < 0:
+            raise ScriptError(f"第 {idx} 个分镜 hold_sec 必须是有限非负数")
         norm = {
             "shot_id": idx,  # 统一按顺序重新编号，保证分镜号与时长表一一对应
             "visual": str(shot.get("visual") or "").strip(),
             "narration": str(shot.get("narration") or "").strip(),
             "subtitle": str(shot.get("subtitle") or "").strip(),
             "screen_note": str(shot.get("screen_note") or "").strip(),
-            "hold_sec": round(max(hold, 0.0), 1),
-            "source_ids": sorted({str(s).strip().upper() for s in source_ids if str(s).strip()}),
+            "hold_sec": round(hold, 1),
+            "source_ids": sorted({s.strip().upper() for s in source_ids if s.strip()}),
         }
         if not norm["visual"]:
             raise ScriptError(f"第 {idx} 个分镜缺少 visual（画面描述）")
